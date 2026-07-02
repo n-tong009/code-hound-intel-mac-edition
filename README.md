@@ -39,7 +39,7 @@
 
 設計や検索アルゴリズム、各コンポーネントの詳細は静的ドキュメントにまとめています。
 
-- https://xxxxx.github.io/code-rag/
+- https://n-tong009.github.io/code-hound-intel-mac-edition/
 
 ---
 
