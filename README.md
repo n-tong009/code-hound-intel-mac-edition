@@ -1,4 +1,6 @@
-# code-rag (CodeHound Intel Edition)
+![OG Image](docs/og_image.png)
+
+# Code Hound Intel Mac Edition
 
 ローカルで動く **コード検索サーバー** (対象プラットフォーム: Intel Mac / x86_64)。
 「この処理どこに書いてある?」を、キーワードだけでなく **意味** で探せる。外部 API もクラウドも使わず手元 1 台で完結する。
@@ -52,7 +54,7 @@ subgraph Client["MCP クライアント (Claude Code 等)"]
     C[ツール呼び出し]
 end
 
-subgraph Server["code-rag サーバー (127.0.0.1:8765)"]
+subgraph Server["code-hound-ime サーバー (127.0.0.1:8765)"]
     S[server.py / FastMCP]
     R[retrieval.py<br/>ハイブリッド検索]
     G[graph.py<br/>コードグラフ]
@@ -431,7 +433,7 @@ linkStyle 5 stroke:#F9A825,stroke-width:3px
 ## セットアップ
 
 ```bash
-cd ~/code-rag
+cd ~/code-hound-ime
 
 # 1. 依存インストール (初回は bge-small モデルのダウンロードあり)
 uv sync
@@ -474,7 +476,7 @@ uv run python server.py --transport sse
 nohup uv run python server.py > data/logs/server.log 2>&1 & echo $! > data/server.pid
 
 # 停止
-kill $(cat ~/code-rag/data/server.pid)
+kill $(cat ~/code-hound-ime/data/server.pid)
 
 # 起動確認
 curl -sS -o /dev/null -w "%{http_code}\n" http://localhost:8765/sse --max-time 2
@@ -500,16 +502,16 @@ curl -sS -o /dev/null -w "%{http_code}\n" http://localhost:8765/sse --max-time 2
 
 ```bash
 # server
-cp ~/code-rag/scripts/launch_agent.plist ~/Library/LaunchAgents/com.local.code-rag.plist
-launchctl load ~/Library/LaunchAgents/com.local.code-rag.plist
+cp ~/code-hound-ime/scripts/launch_agent.plist ~/Library/LaunchAgents/com.local.code-hound-ime.plist
+launchctl load ~/Library/LaunchAgents/com.local.code-hound-ime.plist
 
 # watcher (差分インデックス常駐プロセス)
-cp ~/code-rag/scripts/launch_agent_watcher.plist ~/Library/LaunchAgents/com.local.code-rag-watcher.plist
-launchctl load ~/Library/LaunchAgents/com.local.code-rag-watcher.plist
+cp ~/code-hound-ime/scripts/launch_agent_watcher.plist ~/Library/LaunchAgents/com.local.code-hound-ime-watcher.plist
+launchctl load ~/Library/LaunchAgents/com.local.code-hound-ime-watcher.plist
 
 # 停止
-launchctl unload ~/Library/LaunchAgents/com.local.code-rag.plist
-launchctl unload ~/Library/LaunchAgents/com.local.code-rag-watcher.plist
+launchctl unload ~/Library/LaunchAgents/com.local.code-hound-ime.plist
+launchctl unload ~/Library/LaunchAgents/com.local.code-hound-ime-watcher.plist
 ```
 
 > launchd サービスの再起動は `eval/run.py` が recall@5 ≥ 0.92 をクリアした後にのみ行う。
@@ -520,7 +522,7 @@ commit 後に強制 reindex するための保険フック。
 
 ```bash
 # 対象リポジトリで実行
-ln -s ~/code-rag/hooks/post-commit .git/hooks/post-commit
+ln -s ~/code-hound-ime/hooks/post-commit .git/hooks/post-commit
 chmod +x .git/hooks/post-commit
 
 # config.yaml の repos[].name と一致しない場合
