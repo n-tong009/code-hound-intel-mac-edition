@@ -1,0 +1,691 @@
+{
+  "phase": "phase2_ast_header",
+  "timestamp": "20260425T060311Z",
+  "recall_at_5": 0.9,
+  "mrr": 0.775,
+  "recall_hits": 18,
+  "total": 20,
+  "avg_latency_ms": 2940.6342042493634,
+  "details": [
+    {
+      "id": "q01",
+      "query": "dependency injection resolution solve dependencies",
+      "recall": true,
+      "rank": 1,
+      "latency_ms": 5424.074601003667,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/dependencies/utils.py",
+          "symbol": "solve_dependencies",
+          "score": 0.8927412033081055
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/dependencies/utils.py",
+          "symbol": "nan",
+          "score": 0.7406517267227173
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/dependencies/utils.py",
+          "symbol": "solve_dependencies",
+          "score": 0.6988165974617004
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "app",
+          "score": 0.3002331256866455
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/dependencies/utils.py",
+          "symbol": "get_dependant",
+          "score": 0.1805160939693451
+        }
+      ]
+    },
+    {
+      "id": "q02",
+      "query": "request body validation parsing pydantic",
+      "recall": true,
+      "rank": 2,
+      "latency_ms": 2952.3892529978184,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/openapi/utils.py",
+          "symbol": "nan",
+          "score": 0.7384660840034485
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/dependencies/utils.py",
+          "symbol": "nan",
+          "score": 0.5793718695640564
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/exceptions.py",
+          "symbol": "nan",
+          "score": 0.5654375553131104
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/dependencies/utils.py",
+          "symbol": "nan",
+          "score": 0.17254239320755005
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/openapi/utils.py",
+          "symbol": "nan",
+          "score": 0.16234943270683289
+        }
+      ]
+    },
+    {
+      "id": "q03",
+      "query": "generate OpenAPI schema operation paths",
+      "recall": false,
+      "rank": null,
+      "latency_ms": 2505.4537469986826,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "options",
+          "score": 0.9988983869552612
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "trace",
+          "score": 0.9988023042678833
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "get",
+          "score": 0.9986240863800049
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "get",
+          "score": 0.998542070388794
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "head",
+          "score": 0.998492956161499
+        }
+      ]
+    },
+    {
+      "id": "q04",
+      "query": "WebSocket route registration handler session",
+      "recall": true,
+      "rank": 1,
+      "latency_ms": 2880.6151220051106,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "APIRouter",
+          "score": 0.4388536214828491
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "APIRouter",
+          "score": 0.07121185958385468
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "include_router",
+          "score": 0.03152246028184891
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "__init__",
+          "score": 0.001838734489865601
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "APIRouter",
+          "score": 0.001023683580569923
+        }
+      ]
+    },
+    {
+      "id": "q05",
+      "query": "HTTP exception handler validation error response",
+      "recall": true,
+      "rank": 1,
+      "latency_ms": 2711.072938007419,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/exception_handlers.py",
+          "symbol": "nan",
+          "score": 0.9629920125007629
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "exception_handler",
+          "score": 0.8831474781036377
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/exceptions.py",
+          "symbol": "nan",
+          "score": 0.6994819045066833
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/exceptions.py",
+          "symbol": "HTTPException",
+          "score": 0.5921863317489624
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "FastAPI",
+          "score": 0.5411443710327148
+        }
+      ]
+    },
+    {
+      "id": "q06",
+      "query": "OAuth2 password bearer authentication flow token",
+      "recall": true,
+      "rank": 1,
+      "latency_ms": 2896.005628994317,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/oauth2.py",
+          "symbol": "nan",
+          "score": 0.9977384805679321
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/oauth2.py",
+          "symbol": "nan",
+          "score": 0.9953559637069702
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/oauth2.py",
+          "symbol": "OAuth2",
+          "score": 0.9895846247673035
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/oauth2.py",
+          "symbol": "nan",
+          "score": 0.9598342776298523
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/oauth2.py",
+          "symbol": "nan",
+          "score": 0.9077763557434082
+        }
+      ]
+    },
+    {
+      "id": "q07",
+      "query": "HTTP Bearer token authorization header security",
+      "recall": true,
+      "rank": 1,
+      "latency_ms": 2358.0863940005656,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/http.py",
+          "symbol": "nan",
+          "score": 0.998913049697876
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/http.py",
+          "symbol": "HTTPAuthorizationCredentials",
+          "score": 0.998796820640564
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/oauth2.py",
+          "symbol": "nan",
+          "score": 0.9850569367408752
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/http.py",
+          "symbol": "nan",
+          "score": 0.977451741695404
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/http.py",
+          "symbol": "nan",
+          "score": 0.977417528629303
+        }
+      ]
+    },
+    {
+      "id": "q08",
+      "query": "API key header query cookie authentication",
+      "recall": true,
+      "rank": 1,
+      "latency_ms": 2356.781463997322,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/api_key.py",
+          "symbol": "nan",
+          "score": 0.9862441420555115
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/api_key.py",
+          "symbol": "nan",
+          "score": 0.9832578301429749
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/api_key.py",
+          "symbol": "nan",
+          "score": 0.9496776461601257
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/api_key.py",
+          "symbol": "APIKeyCookie",
+          "score": 0.9155474305152893
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/api_key.py",
+          "symbol": "nan",
+          "score": 0.7307406067848206
+        }
+      ]
+    },
+    {
+      "id": "q09",
+      "query": "serialize response endpoint handler request",
+      "recall": true,
+      "rank": 1,
+      "latency_ms": 2565.967032001936,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "nan",
+          "score": 0.6486754417419434
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "app",
+          "score": 0.5751959085464478
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "app",
+          "score": 0.3734971880912781
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "trace",
+          "score": 0.24518819153308868
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "put",
+          "score": 0.17911286652088165
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "query": "background task execution async",
+      "recall": true,
+      "rank": 1,
+      "latency_ms": 2785.6250059994636,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/background.py",
+          "symbol": "BackgroundTasks",
+          "score": 0.8619574904441833
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "app",
+          "score": 0.8148519396781921
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "app",
+          "score": 0.8094725012779236
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/dependencies/utils.py",
+          "symbol": "solve_dependencies",
+          "score": 0.2803201377391815
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "app",
+          "score": 0.25218307971954346
+        }
+      ]
+    },
+    {
+      "id": "q11",
+      "query": "CORS middleware cross origin resource sharing",
+      "recall": true,
+      "rank": 1,
+      "latency_ms": 3001.491367002018,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/middleware/cors.py",
+          "symbol": "nan",
+          "score": 0.14319229125976562
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "FastAPI",
+          "score": 6.629465497098863e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/_compat/shared.py",
+          "symbol": "nan",
+          "score": 6.356406083796173e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/_compat/__init__.py",
+          "symbol": "nan",
+          "score": 4.6044064220041037e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/middleware/__init__.py",
+          "symbol": "nan",
+          "score": 4.209158578305505e-05
+        }
+      ]
+    },
+    {
+      "id": "q12",
+      "query": "path parameter query parameter extraction request",
+      "recall": false,
+      "rank": null,
+      "latency_ms": 2999.6589240035973,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "options",
+          "score": 0.7207080125808716
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "options",
+          "score": 0.6501111388206482
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/param_functions.py",
+          "symbol": "nan",
+          "score": 0.5269277691841125
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/openapi/utils.py",
+          "symbol": "nan",
+          "score": 0.16649872064590454
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/param_functions.py",
+          "symbol": "Path",
+          "score": 0.08363225311040878
+        }
+      ]
+    },
+    {
+      "id": "q13",
+      "query": "pydantic model field compat v2 compatibility layer",
+      "recall": true,
+      "rank": 1,
+      "latency_ms": 3600.449002988171,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/_compat/v2.py",
+          "symbol": "nan",
+          "score": 0.9734921455383301
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/_compat/v2.py",
+          "symbol": "nan",
+          "score": 0.9333215355873108
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/_compat/__init__.py",
+          "symbol": "nan",
+          "score": 0.9121993184089661
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/_compat/v2.py",
+          "symbol": "nan",
+          "score": 0.8185147047042847
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/_compat/shared.py",
+          "symbol": "nan",
+          "score": 0.7951428890228271
+        }
+      ]
+    },
+    {
+      "id": "q14",
+      "query": "server sent events SSE streaming response",
+      "recall": true,
+      "rank": 1,
+      "latency_ms": 3007.157058993471,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/sse.py",
+          "symbol": "nan",
+          "score": 0.9965978264808655
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "app",
+          "score": 0.9849231243133545
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "app",
+          "score": 0.35156840085983276
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "app",
+          "score": 0.007600055541843176
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/sse.py",
+          "symbol": "nan",
+          "score": 0.006651807110756636
+        }
+      ]
+    },
+    {
+      "id": "q15",
+      "query": "static files serve mount directory",
+      "recall": true,
+      "rank": 4,
+      "latency_ms": 2584.9567359982757,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "nan",
+          "score": 0.001081389607861638
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "__init__",
+          "score": 0.0005149259231984615
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "app",
+          "score": 0.0004944137181155384
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/staticfiles.py",
+          "symbol": "nan",
+          "score": 0.00026578744291327894
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "__init__",
+          "score": 3.140274930046871e-05
+        }
+      ]
+    },
+    {
+      "id": "q16",
+      "query": "Jinja2 template rendering HTML response",
+      "recall": true,
+      "rank": 1,
+      "latency_ms": 2895.6879769975785,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/templating.py",
+          "symbol": "nan",
+          "score": 0.053717635571956635
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/responses.py",
+          "symbol": "nan",
+          "score": 0.003977544140070677
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "APIRouter",
+          "score": 0.0034591928124427795
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "put",
+          "score": 0.0013554313918575644
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/responses.py",
+          "symbol": "nan",
+          "score": 0.0008306807721965015
+        }
+      ]
+    },
+    {
+      "id": "q17",
+      "query": "application lifespan context manager startup shutdown",
+      "recall": true,
+      "rank": 1,
+      "latency_ms": 2902.9111380077666,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "__init__",
+          "score": 0.9958833456039429
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "nan",
+          "score": 0.978185772895813
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "__init__",
+          "score": 0.9761014580726624
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "APIRouter",
+          "score": 0.970960259437561
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "__init__",
+          "score": 0.9469385147094727
+        }
+      ]
+    },
+    {
+      "id": "q18",
+      "query": "Swagger UI ReDoc HTML documentation endpoint",
+      "recall": true,
+      "rank": 4,
+      "latency_ms": 2405.330845998833,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "__init__",
+          "score": 0.9897087216377258
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/param_functions.py",
+          "symbol": "Path",
+          "score": 0.4035211205482483
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "__init__",
+          "score": 0.338694304227829
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/openapi/docs.py",
+          "symbol": "get_redoc_html",
+          "score": 0.11473122984170914
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/openapi/docs.py",
+          "symbol": "get_redoc_html",
+          "score": 0.04472720995545387
+        }
+      ]
+    },
+    {
+      "id": "q19",
+      "query": "form data file upload multipart processing",
+      "recall": true,
+      "rank": 2,
+      "latency_ms": 2994.6283729950665,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/param_functions.py",
+          "symbol": "File",
+          "score": 0.8860085010528564
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/datastructures.py",
+          "symbol": "UploadFile",
+          "score": 0.021592656150460243
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/datastructures.py",
+          "symbol": "nan",
+          "score": 0.01954117976129055
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/__init__.py",
+          "symbol": "nan",
+          "score": 0.0005406973650678992
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/param_functions.py",
+          "symbol": "nan",
+          "score": 0.00028713399660773575
+        }
+      ]
+    },
+    {
+      "id": "q20",
+      "query": "flatten dependency graph get dependant params",
+      "recall": true,
+      "rank": 1,
+      "latency_ms": 2984.341475996189,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/dependencies/utils.py",
+          "symbol": "get_flat_dependant",
+          "score": 0.9846802353858948
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/dependencies/utils.py",
+          "symbol": "nan",
+          "score": 0.9822403788566589
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/dependencies/utils.py",
+          "symbol": "get_dependant",
+          "score": 0.9708780646324158
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/openapi/utils.py",
+          "symbol": "nan",
+          "score": 0.913718044757843
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/dependencies/utils.py",
+          "symbol": "nan",
+          "score": 0.8543140888214111
+        }
+      ]
+    }
+  ]
+}

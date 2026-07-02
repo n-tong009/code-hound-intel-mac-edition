@@ -1,0 +1,150 @@
+{
+  "phase": "phase1",
+  "timestamp": "20260422T083740Z",
+  "recall_at_5": 0.0,
+  "mrr": 0.0,
+  "recall_hits": 0,
+  "total": 20,
+  "details": [
+    {
+      "id": "q01",
+      "query": "依存性注入の解決処理",
+      "recall": false,
+      "rank": null,
+      "top_hits": []
+    },
+    {
+      "id": "q02",
+      "query": "リクエストボディのバリデーションとパース",
+      "recall": false,
+      "rank": null,
+      "top_hits": []
+    },
+    {
+      "id": "q03",
+      "query": "OpenAPI スキーマ生成",
+      "recall": false,
+      "rank": null,
+      "top_hits": []
+    },
+    {
+      "id": "q04",
+      "query": "WebSocket ルートの登録とハンドリング",
+      "recall": false,
+      "rank": null,
+      "top_hits": []
+    },
+    {
+      "id": "q05",
+      "query": "HTTP 例外ハンドラ",
+      "recall": false,
+      "rank": null,
+      "top_hits": []
+    },
+    {
+      "id": "q06",
+      "query": "OAuth2 パスワード認証フロー",
+      "recall": false,
+      "rank": null,
+      "top_hits": []
+    },
+    {
+      "id": "q07",
+      "query": "Bearer トークン認証",
+      "recall": false,
+      "rank": null,
+      "top_hits": []
+    },
+    {
+      "id": "q08",
+      "query": "API キーヘッダー認証",
+      "recall": false,
+      "rank": null,
+      "top_hits": []
+    },
+    {
+      "id": "q09",
+      "query": "ルートハンドラのレスポンスシリアライズ",
+      "recall": false,
+      "rank": null,
+      "top_hits": []
+    },
+    {
+      "id": "q10",
+      "query": "バックグラウンドタスクの実行",
+      "recall": false,
+      "rank": null,
+      "top_hits": []
+    },
+    {
+      "id": "q11",
+      "query": "CORS ミドルウェア設定",
+      "recall": false,
+      "rank": null,
+      "top_hits": []
+    },
+    {
+      "id": "q12",
+      "query": "パスパラメータとクエリパラメータの抽出",
+      "recall": false,
+      "rank": null,
+      "top_hits": []
+    },
+    {
+      "id": "q13",
+      "query": "Pydantic モデルの互換レイヤー",
+      "recall": false,
+      "rank": null,
+      "top_hits": []
+    },
+    {
+      "id": "q14",
+      "query": "SSE (Server-Sent Events) レスポンス",
+      "recall": false,
+      "rank": null,
+      "top_hits": []
+    },
+    {
+      "id": "q15",
+      "query": "静的ファイル配信の設定",
+      "recall": false,
+      "rank": null,
+      "top_hits": []
+    },
+    {
+      "id": "q16",
+      "query": "テンプレートエンジンの統合",
+      "recall": false,
+      "rank": null,
+      "top_hits": []
+    },
+    {
+      "id": "q17",
+      "query": "アプリケーションのライフスパン管理",
+      "recall": false,
+      "rank": null,
+      "top_hits": []
+    },
+    {
+      "id": "q18",
+      "query": "OpenAPI ドキュメント UI の生成",
+      "recall": false,
+      "rank": null,
+      "top_hits": []
+    },
+    {
+      "id": "q19",
+      "query": "フォームデータとファイルアップロードの処理",
+      "recall": false,
+      "rank": null,
+      "top_hits": []
+    },
+    {
+      "id": "q20",
+      "query": "依存関係グラフのフラット化",
+      "recall": false,
+      "rank": null,
+      "top_hits": []
+    }
+  ]
+}

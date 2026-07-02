@@ -1,0 +1,17 @@
+#!/bin/bash
+# code-rag post-commit hook — incrementally re-index after commit.
+# Install per-repo:
+#   ln -s <code-rag-path>/hooks/post-commit .git/hooks/post-commit
+#   chmod +x .git/hooks/post-commit
+# Then export REPO_NAME (matching config.yaml `repos[].name`) in the repo or set CODE_RAG_REPO.
+
+REPO_NAME="${CODE_RAG_REPO:-default}"
+SERVER="${CODE_RAG_SERVER:-http://127.0.0.1:8765}"
+SHA=$(git rev-parse HEAD 2>/dev/null)
+
+# printf keeps REPO_NAME from breaking out of the JSON string.
+PAYLOAD=$(printf '{"repo":"%s","commit_sha":"%s"}' "${REPO_NAME}" "${SHA}")
+curl -sS -X POST "${SERVER}/admin/reindex" \
+  -H "Content-Type: application/json" \
+  -d "${PAYLOAD}" \
+  --max-time 5 > /dev/null 2>&1 || true

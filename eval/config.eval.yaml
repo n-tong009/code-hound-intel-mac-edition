@@ -1,0 +1,36 @@
+# 評価専用 config (specs/003 US4 / FR-008)。
+# 評価台 = fastapi コーパス。通常運用 config.yaml の repos[] からは外し、ここに温存する。
+# 役割: eval コーパスを「再索引する場合のみ」この config を使う。
+#   既存 DB は repo 名 "default" で fastapi を索引済 (凍結)。eval/run.py は no-arg で
+#   この repo "default" を計測し続ける (CLAUDE.md 不変条件 recall@5 ≥ 0.92 を保持)。
+#   chunk 数を変えないため、再索引は原則しない。再索引が必要な時のみ本 config の
+#   固有 exclude / max_file_bytes を使い、chunk 数を従来同値に保つ。
+repos:
+  - name: default
+    path: /path/to/code-rag-targets/fastapi
+    languages: [python, typescript, javascript, go, rust]
+
+embedding:
+  provider: fastembed
+  model: BAAI/bge-small-en-v1.5
+  dimension: 384
+  batch_size: 32
+
+storage:
+  type: sqlite
+  path: ./data/code_rag.db
+
+chunking:
+  chunk_lines: 40
+  chunk_lines_overlap: 5
+  max_chars: 2000
+
+hygiene:
+  respect_gitignore: true
+  # 256KB: fastapi の routing.py (197KB) / applications.py (181KB) を含めるため温存。
+  max_file_bytes: 262144
+  max_file_lines: 5000
+  secret_scan: true
+  # fastapi 評価対象では docs/tutorials がノイズになるため除外 (chunk 数を従来同値に保つ)。
+  extra_exclude_dirs: ["docs_src", "docs", "scripts"]
+  extra_exclude_globs: []

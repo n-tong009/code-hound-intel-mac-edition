@@ -1,0 +1,161 @@
+# FastAPI codebase evaluation QA (English queries for nomic-embed-text compatibility)
+
+- id: q01
+  query: "dependency injection resolution solve dependencies"
+  expected_paths:
+    - fastapi/dependencies/utils.py
+  expected_symbols:
+    - solve_dependencies
+
+- id: q02
+  query: "request body validation parsing pydantic"
+  expected_paths:
+    - fastapi/dependencies/utils.py
+  expected_symbols:
+    - request_body_to_args
+
+- id: q03
+  query: "generate OpenAPI schema operation paths"
+  expected_paths:
+    - fastapi/openapi/utils.py
+  expected_symbols:
+    - get_openapi
+    - get_openapi_path
+
+- id: q04
+  query: "WebSocket route registration handler session"
+  expected_paths:
+    - fastapi/routing.py
+    - fastapi/websockets.py
+  expected_symbols:
+    - websocket_session
+    - get_websocket_app
+    - APIWebSocketRoute
+
+- id: q05
+  query: "HTTP exception handler validation error response"
+  expected_paths:
+    - fastapi/exception_handlers.py
+  expected_symbols:
+    - http_exception_handler
+    - request_validation_exception_handler
+
+- id: q06
+  query: "OAuth2 password bearer authentication flow token"
+  expected_paths:
+    - fastapi/security/oauth2.py
+  expected_symbols:
+    - OAuth2PasswordBearer
+    - OAuth2PasswordRequestForm
+
+- id: q07
+  query: "HTTP Bearer token authorization header security"
+  expected_paths:
+    - fastapi/security/http.py
+  expected_symbols:
+    - HTTPBearer
+    - HTTPAuthorizationCredentials
+
+- id: q08
+  query: "API key header query cookie authentication"
+  expected_paths:
+    - fastapi/security/api_key.py
+  expected_symbols:
+    - APIKeyHeader
+    - APIKeyQuery
+
+- id: q09
+  query: "serialize response endpoint handler request"
+  expected_paths:
+    - fastapi/routing.py
+  expected_symbols:
+    - serialize_response
+    - get_request_handler
+
+- id: q10
+  query: "background task execution async"
+  expected_paths:
+    - fastapi/background.py
+  expected_symbols:
+    - BackgroundTask
+    - BackgroundTasks
+
+- id: q11
+  query: "CORS middleware cross origin resource sharing"
+  expected_paths:
+    - fastapi/middleware/cors.py
+  expected_symbols:
+    - CORSMiddleware
+
+- id: q12
+  query: "path parameter query parameter extraction request"
+  expected_paths:
+    - fastapi/dependencies/utils.py
+  expected_symbols:
+    - request_params_to_args
+    - get_flat_params
+
+- id: q13
+  query: "pydantic model field compat v2 compatibility layer"
+  expected_paths:
+    - fastapi/_compat/v2.py
+    - fastapi/_compat/shared.py
+  expected_symbols:
+    - ModelField
+
+- id: q14
+  query: "server sent events SSE streaming response"
+  expected_paths:
+    - fastapi/sse.py
+    - fastapi/responses.py
+  expected_symbols:
+    - ServerSentEvent
+
+- id: q15
+  query: "static files serve mount directory"
+  expected_paths:
+    - fastapi/staticfiles.py
+  expected_symbols:
+    - StaticFiles
+
+- id: q16
+  query: "Jinja2 template rendering HTML response"
+  expected_paths:
+    - fastapi/templating.py
+  expected_symbols:
+    - Jinja2Templates
+
+- id: q17
+  query: "application lifespan context manager startup shutdown"
+  expected_paths:
+    - fastapi/routing.py
+    - fastapi/applications.py
+  expected_symbols:
+    - _merge_lifespan_context
+    - _DefaultLifespan
+
+- id: q18
+  query: "Swagger UI ReDoc HTML documentation endpoint"
+  expected_paths:
+    - fastapi/openapi/docs.py
+  expected_symbols:
+    - get_swagger_ui_html
+    - get_redoc_html
+
+- id: q19
+  query: "form data file upload multipart processing"
+  expected_paths:
+    - fastapi/dependencies/utils.py
+    - fastapi/datastructures.py
+  expected_symbols:
+    - _extract_form_body
+    - ensure_multipart_is_installed
+    - UploadFile
+
+- id: q20
+  query: "flatten dependency graph get dependant params"
+  expected_paths:
+    - fastapi/dependencies/utils.py
+  expected_symbols:
+    - get_flat_dependant
+    - get_dependant

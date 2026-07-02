@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:#0E1116;}
+::selection{background:rgba(79,209,181,0.30);color:#ffffff;}
+::-webkit-scrollbar{width:11px;height:11px;}
+::-webkit-scrollbar-thumb{background:#272E39;border-radius:6px;border:2px solid #0E1116;}
+::-webkit-scrollbar-thumb:hover{background:#323b48;}
+::-webkit-scrollbar-track{background:transparent;}
+.mermaid-fig svg{max-width:100%;height:auto;display:block;margin:0 auto;}
+.mermaid-fig .cluster-label,.mermaid-fig .nodeLabel,.mermaid-fig .edgeLabel{font-family:'IBM Plex Sans JP',sans-serif!important;}
+@keyframes crPulse{0%,100%{opacity:1;}50%{opacity:0.35;}}
+</style>
+</helmet>
+<div style="min-height:100vh;background:#0E1116;color:#E7E9EC;font-family:'IBM Plex Sans JP',sans-serif;display:flex;-webkit-font-smoothing:antialiased;">
+
+<nav style="width:282px;flex:none;align-self:flex-start;position:sticky;top:0;height:100vh;overflow-y:auto;background:#0A0D11;border-right:1px solid #1A2029;padding:26px 16px 48px;">
+<div style="display:flex;align-items:center;gap:12px;padding:2px 10px 24px;">
+<div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(140deg,#4FD1B5,#2E8E78);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-weight:600;color:#06120E;font-size:15px;letter-spacing:-0.04em;">cr</div>
+<div>
+<div style="font-weight:700;font-size:15px;letter-spacing:-0.01em;color:#EEF0F2;">code-rag</div>
+<div style="font-size:11px;color:#69707B;margin-top:2px;font-family:'IBM Plex Mono',monospace;">Intel Edition</div>
+</div>
+</div>
+
+<div style="font-size:10.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#5A626D;padding:14px 12px 7px;">はじめに</div>
+<a href="#overview" data-nav="overview" style="display:block;text-decoration:none;padding:7px 12px;border-radius:7px;font-size:13.5px;color:#4FD1B5;background:rgba(79,209,181,0.10);border-left:2px solid #4FD1B5;margin:1px 0;font-weight:600;">概要</a>
+<a href="#architecture" data-nav="architecture" style="display:block;text-decoration:none;padding:7px 12px;border-radius:7px;font-size:13.5px;color:#99A1AD;background:transparent;border-left:2px solid transparent;margin:1px 0;font-weight:500;">全体像</a>
+<a href="#features" data-nav="features" style="display:block;text-decoration:none;padding:7px 12px;border-radius:7px;font-size:13.5px;color:#99A1AD;background:transparent;border-left:2px solid transparent;margin:1px 0;font-weight:500;">主な機能</a>
+
+<div style="font-size:10.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#5A626D;padding:18px 12px 7px;">設計</div>
+<a href="#pipeline" data-nav="pipeline" style="display:block;text-decoration:none;padding:7px 12px;border-radius:7px;font-size:13.5px;color:#99A1AD;background:transparent;border-left:2px solid transparent;margin:1px 0;font-weight:500;">検索パイプライン</a>
+<a href="#codegraph" data-nav="codegraph" style="display:block;text-decoration:none;padding:7px 12px;border-radius:7px;font-size:13.5px;color:#99A1AD;background:transparent;border-left:2px solid transparent;margin:1px 0;font-weight:500;">コードグラフの仕組み</a>
+<a href="#files" data-nav="files" style="display:block;text-decoration:none;padding:7px 12px;border-radius:7px;font-size:13.5px;color:#99A1AD;background:transparent;border-left:2px solid transparent;margin:1px 0;font-weight:500;">アーキテクチャ</a>
+
+<div style="font-size:10.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#5A626D;padding:18px 12px 7px;">リファレンス</div>
+<a href="#tools" data-nav="tools" style="display:block;text-decoration:none;padding:7px 12px;border-radius:7px;font-size:13.5px;color:#99A1AD;background:transparent;border-left:2px solid transparent;margin:1px 0;font-weight:500;">MCP ツール一覧</a>
+
+<div style="font-size:10.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#5A626D;padding:18px 12px 7px;">運用</div>
+<a href="#multirepo" data-nav="multirepo" style="display:block;text-decoration:none;padding:7px 12px;border-radius:7px;font-size:13.5px;color:#99A1AD;background:transparent;border-left:2px solid transparent;margin:1px 0;font-weight:500;">マルチ repo</a>
+<a href="#setup" data-nav="setup" style="display:block;text-decoration:none;padding:7px 12px;border-radius:7px;font-size:13.5px;color:#99A1AD;background:transparent;border-left:2px solid transparent;margin:1px 0;font-weight:500;">セットアップ</a>
+<a href="#run" data-nav="run" style="display:block;text-decoration:none;padding:7px 12px;border-radius:7px;font-size:13.5px;color:#99A1AD;background:transparent;border-left:2px solid transparent;margin:1px 0;font-weight:500;">起動 / 停止</a>
+<a href="#security" data-nav="security" style="display:block;text-decoration:none;padding:7px 12px;border-radius:7px;font-size:13.5px;color:#99A1AD;background:transparent;border-left:2px solid transparent;margin:1px 0;font-weight:500;">セキュリティ</a>
+<a href="#ops" data-nav="ops" style="display:block;text-decoration:none;padding:7px 12px;border-radius:7px;font-size:13.5px;color:#99A1AD;background:transparent;border-left:2px solid transparent;margin:1px 0;font-weight:500;">運用 (launchd)</a>
+<a href="#intel" data-nav="intel" style="display:block;text-decoration:none;padding:7px 12px;border-radius:7px;font-size:13.5px;color:#99A1AD;background:transparent;border-left:2px solid transparent;margin:1px 0;font-weight:500;">Intel Mac 制約</a>
+<a href="#eval" data-nav="eval" style="display:block;text-decoration:none;padding:7px 12px;border-radius:7px;font-size:13.5px;color:#99A1AD;background:transparent;border-left:2px solid transparent;margin:1px 0;font-weight:500;">評価</a>
+
+<div style="margin-top:26px;padding:14px;border:1px solid #1A2029;border-radius:10px;background:#0D1116;">
+<div style="display:flex;flex-direction:column;gap:9px;">
+<div style="display:flex;align-items:center;gap:9px;font-size:12px;color:#8A929D;"><span style="width:6px;height:6px;border-radius:50%;background:#4FD1B5;"></span>オフライン動作</div>
+<div style="display:flex;align-items:center;gap:9px;font-size:12px;color:#8A929D;"><span style="width:6px;height:6px;border-radius:50%;background:#5B9BD5;"></span>シングルユーザー</div>
+<div style="display:flex;align-items:center;gap:9px;font-size:12px;color:#8A929D;"><span style="width:6px;height:6px;border-radius:50%;background:#9B7BD4;"></span>手元 1 台で完結</div>
+</div>
+</div>
+</nav>
+
+<main style="flex:1;min-width:0;">
+<div style="max-width:880px;margin:0 auto;padding:0 56px 130px;">
+
+<header style="padding:72px 0 40px;border-bottom:1px solid #1A2029;">
+<div style="display:inline-flex;align-items:center;gap:9px;font-size:12px;color:#8FE3D0;background:rgba(79,209,181,0.09);border:1px solid rgba(79,209,181,0.24);padding:5px 13px;border-radius:999px;font-family:'IBM Plex Mono',monospace;margin-bottom:26px;letter-spacing:0.01em;">
+<span style="width:6px;height:6px;border-radius:50%;background:#4FD1B5;animation:crPulse 2.4s ease-in-out infinite;"></span>
+Intel Mac · x86_64 · offline
+</div>
+<h1 style="font-size:48px;line-height:1.12;font-weight:700;letter-spacing:-0.025em;margin:0 0 20px;color:#F2F4F6;">ローカルで動く<br/>セマンティック・コード検索</h1>
+<p style="font-size:18.5px;line-height:1.7;color:#99A1AD;max-width:700px;margin:0;">「この処理どこに書いてある?」を、キーワードだけでなく <em style="color:#8FE3D0;font-style:normal;font-weight:600;">意味</em> で探せるコード検索サーバー。外部 API もクラウドも使わず、手元 1 台で完結する。</p>
+</header>
+
+<section id="overview" data-section="overview" style="scroll-margin-top:28px;padding:52px 0;border-bottom:1px solid #161B22;">
+<div style="display:flex;align-items:baseline;gap:14px;margin-bottom:26px;">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#4FD1B5;">01</span>
+<h2 style="font-size:29px;font-weight:600;letter-spacing:-0.015em;margin:0;color:#EEF0F2;">概要</h2>
+</div>
+
+<p style="font-size:16px;line-height:1.9;color:#B7BFC9;margin:0 0 18px;">たとえば「ユーザー認証してるところ」と打つと、<code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">auth</code> という単語が一文字も入っていない関数でも、<strong style="color:#E7E9EC;font-weight:600;">やっていることが認証なら</strong> ヒットする。ふつうの <code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">grep</code>（文字列一致）では引っかからないコードを見つけられるのが核心。さらに、見つけた関数が <strong style="color:#E7E9EC;font-weight:600;">どこから呼ばれ・何を import しているか</strong> を構造でたどれる。</p>
+
+<div style="overflow-x:auto;border:1px solid #20262F;border-radius:12px;margin:26px 0 8px;">
+<table style="width:100%;border-collapse:collapse;font-size:14.5px;">
+<thead><tr>
+<th style="text-align:left;padding:13px 18px;background:#13171E;color:#8A929D;font-weight:600;font-size:11.5px;letter-spacing:0.05em;text-transform:uppercase;border-bottom:1px solid #20262F;">やりたいこと</th>
+<th style="text-align:left;padding:13px 18px;background:#13171E;color:#8A929D;font-weight:600;font-size:11.5px;letter-spacing:0.05em;text-transform:uppercase;border-bottom:1px solid #20262F;">このサーバーの答え</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="padding:13px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;">「決済処理ってどこ?」と意味で探す</td>
+<td style="padding:13px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;"><code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">search_code</code>（意味検索）</td>
+</tr>
+<tr>
+<td style="padding:13px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;">「この関数、どこで使われてる?」</td>
+<td style="padding:13px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;"><code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">find_references</code>（定義・参照を列挙）</td>
+</tr>
+<tr>
+<td style="padding:13px 18px;color:#B7BFC9;vertical-align:top;">「この関数の周辺を見渡したい」</td>
+<td style="padding:13px 18px;color:#B7BFC9;vertical-align:top;"><code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">related_code</code>（関連コードを芋づる式に展開）</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<h3 style="font-size:17px;font-weight:600;color:#E7E9EC;margin:38px 0 18px;letter-spacing:-0.01em;">仕組みを支える 3 つの考え方</h3>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;">
+<div style="background:#13171E;border:1px solid #20262F;border-radius:12px;padding:20px;">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#5B9BD5;letter-spacing:0.04em;margin-bottom:10px;">01 / VECTOR</div>
+<div style="font-size:15px;font-weight:600;color:#E7E9EC;margin-bottom:8px;">意味検索</div>
+<p style="font-size:13.5px;line-height:1.75;color:#99A1AD;margin:0;">コードを「意味の近さを数値化したベクトル」に変換して保存し、クエリと近い意味のものを探す。単語が一致しなくても当たる。</p>
+</div>
+<div style="background:#13171E;border:1px solid #20262F;border-radius:12px;padding:20px;">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#4FD1B5;letter-spacing:0.04em;margin-bottom:10px;">02 / HYBRID</div>
+<div style="font-size:15px;font-weight:600;color:#E7E9EC;margin-bottom:8px;">ハイブリッド検索</div>
+<p style="font-size:13.5px;line-height:1.75;color:#99A1AD;margin:0;">意味検索と従来のキーワード一致（全文検索）を両取りして、取りこぼしを減らす。</p>
+</div>
+<div style="background:#13171E;border:1px solid #20262F;border-radius:12px;padding:20px;">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9B7BD4;letter-spacing:0.04em;margin-bottom:10px;">03 / MCP</div>
+<div style="font-size:15px;font-weight:600;color:#E7E9EC;margin-bottom:8px;">MCP サーバー</div>
+<p style="font-size:13.5px;line-height:1.75;color:#99A1AD;margin:0;">AI コーディングツール（Claude Code など）が外部機能を呼び出すための共通規格。このサーバーはその規格で「コード検索」を提供する。</p>
+</div>
+</div>
+
+<div style="margin:30px 0 8px;background:linear-gradient(135deg,rgba(79,209,181,0.07),rgba(79,209,181,0.02));border:1px solid rgba(79,209,181,0.22);border-radius:14px;padding:26px 28px;">
+<div style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#4FD1B5;margin-bottom:12px;">ひとことで言うと</div>
+<p style="font-size:18px;line-height:1.7;color:#DDE2E8;margin:0;font-weight:500;">手元の 1 台を「<span style="color:#8FE3D0;">自分のコードを意味で検索できる専用機</span>」にして常駐させる。外部 API もクラウドも使わず手元で完結（オフライン動作）、自分専用（シングルユーザー）。</p>
+</div>
+
+<details style="margin-top:22px;background:#0D1116;border:1px solid #1E242D;border-radius:12px;padding:0;overflow:hidden;">
+<summary style="cursor:pointer;padding:16px 20px;font-size:14px;font-weight:600;color:#C3CAD3;list-style:none;display:flex;align-items:center;gap:10px;">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#69707B;">{ }</span>技術サマリ（エンジニア向け）
+</summary>
+<div style="padding:4px 22px 22px;">
+<ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:11px;">
+<li style="display:flex;gap:12px;font-size:14px;line-height:1.7;color:#B7BFC9;"><span style="color:#4FD1B5;flex:none;">›</span><span><strong style="color:#E7E9EC;font-weight:600;">ストレージ</strong>: SQLite 単一ファイル（<code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">data/code_rag.db</code>、WAL モード）。ベクトルは float32 BLOB（384 次元）</span></li>
+<li style="display:flex;gap:12px;font-size:14px;line-height:1.7;color:#B7BFC9;"><span style="color:#4FD1B5;flex:none;">›</span><span><strong style="color:#E7E9EC;font-weight:600;">検索</strong>: ベクトル類似 + 全文検索のハイブリッド → 再ランキング → 多様性・合意フィルタ</span></li>
+<li style="display:flex;gap:12px;font-size:14px;line-height:1.7;color:#B7BFC9;"><span style="color:#4FD1B5;flex:none;">›</span><span><strong style="color:#E7E9EC;font-weight:600;">コードグラフ</strong>: import / 定義 / 参照を <code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">edges</code> テーブルに永続化し、BFS で近傍展開</span></li>
+<li style="display:flex;gap:12px;font-size:14px;line-height:1.7;color:#B7BFC9;"><span style="color:#4FD1B5;flex:none;">›</span><span><strong style="color:#E7E9EC;font-weight:600;">インタフェース</strong>: MCP（SSE transport）、<code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">127.0.0.1:8765</code> のみ bind。リモートは SSH トンネル</span></li>
+</ul>
+</div>
+</details>
+</section>
+
+<section id="architecture" data-section="architecture" style="scroll-margin-top:28px;padding:52px 0;border-bottom:1px solid #161B22;">
+<div style="display:flex;align-items:baseline;gap:14px;margin-bottom:14px;">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#4FD1B5;">02</span>
+<h2 style="font-size:29px;font-weight:600;letter-spacing:-0.015em;margin:0;color:#EEF0F2;">全体像</h2>
+</div>
+<p style="font-size:15.5px;line-height:1.85;color:#99A1AD;margin:0 0 28px;">MCP クライアントからの呼び出しを受け、検索・グラフ・ログの各モジュールが SQLite を読み書きする。常駐インデクサが裏でコーパスを最新に保つ。</p>
+<figure class="mermaid-fig" style="margin:0;background:#0B0E12;border:1px solid #1C232C;border-radius:14px;padding:28px 24px;">
+<div id="diagram-architecture" style="min-height:240px;display:flex;align-items:center;justify-content:center;">
+<span style="color:#5A626D;font-size:13px;font-family:'IBM Plex Mono',monospace;animation:crPulse 1.6s ease-in-out infinite;">図を生成しています…</span>
+</div>
+</figure>
+</section>
+
+<section id="features" data-section="features" style="scroll-margin-top:28px;padding:52px 0;border-bottom:1px solid #161B22;">
+<div style="display:flex;align-items:baseline;gap:14px;margin-bottom:26px;">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#4FD1B5;">03</span>
+<h2 style="font-size:29px;font-weight:600;letter-spacing:-0.015em;margin:0;color:#EEF0F2;">主な機能</h2>
+</div>
+<p style="font-size:15.5px;line-height:1.85;color:#B7BFC9;margin:0 0 32px;">基本の意味検索（<code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">search_code</code>）に加えて、検索を診断するツールと、コードを構造でたどるツールを備える。</p>
+
+<h3 style="font-size:18px;font-weight:600;color:#E7E9EC;margin:0 0 6px;letter-spacing:-0.01em;">Search Debug — スコア内訳の可視化</h3>
+<p style="font-size:14.5px;line-height:1.8;color:#99A1AD;margin:0 0 16px;">検索結果が <strong style="color:#E7E9EC;font-weight:600;">なぜその順位になったか</strong> を段階別に返す診断ツール <code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">search_code_debug</code>。同じランキングを実行しつつ、各段階のスコア・脱落理由を <code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">debug</code> に詰めて返す（本体の返り値には影響しない）。</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;margin-bottom:14px;">
+<div style="display:flex;gap:10px;font-size:13.5px;line-height:1.6;color:#B7BFC9;padding:8px 0;"><span style="color:#5B9BD5;flex:none;">›</span><span>vector / bm25 各段の生スコア</span></div>
+<div style="display:flex;gap:10px;font-size:13.5px;line-height:1.6;color:#B7BFC9;padding:8px 0;"><span style="color:#5B9BD5;flex:none;">›</span><span>RRF 統合後の順位</span></div>
+<div style="display:flex;gap:10px;font-size:13.5px;line-height:1.6;color:#B7BFC9;padding:8px 0;"><span style="color:#5B9BD5;flex:none;">›</span><span>reranker 適用後のスコア</span></div>
+<div style="display:flex;gap:10px;font-size:13.5px;line-height:1.6;color:#B7BFC9;padding:8px 0;"><span style="color:#5B9BD5;flex:none;">›</span><span>diversity cap で落ちた chunk</span></div>
+<div style="display:flex;gap:10px;font-size:13.5px;line-height:1.6;color:#B7BFC9;padding:8px 0;"><span style="color:#5B9BD5;flex:none;">›</span><span>consensus guard が救済した chunk</span></div>
+<div style="display:flex;gap:10px;font-size:13.5px;line-height:1.6;color:#B7BFC9;padding:8px 0;"><span style="color:#5B9BD5;flex:none;">›</span><span>各段のエラー（vector / bm25 / rerank）</span></div>
+</div>
+<p style="font-size:14px;line-height:1.8;color:#99A1AD;margin:0;">「reranker が docstring を過大評価 → guard が救済」といった挙動がそのまま読める。チューニングと障害切り分け用。</p>
+
+<h3 style="font-size:18px;font-weight:600;color:#E7E9EC;margin:40px 0 6px;letter-spacing:-0.01em;">コードグラフ探索 — 構造で辿る</h3>
+<p style="font-size:14.5px;line-height:1.8;color:#99A1AD;margin:0 0 16px;">import・定義・参照を tree-sitter で抽出し <code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">edges</code> テーブルに永続化。検索ヒットを起点に <strong style="color:#E7E9EC;font-weight:600;">構造的に関連するコード</strong> を辿れる。</p>
+<ul style="margin:0 0 18px;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;">
+<li style="display:flex;gap:12px;font-size:14.5px;line-height:1.75;color:#B7BFC9;"><span style="color:#4FD1B5;flex:none;">›</span><span><code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">find_references</code>: コードグラフから定義/参照を種別付きで返す。グラフ未登録シンボルのみ grep にフォールバックし、その結果には <code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">approximate: true</code> を付ける</span></li>
+<li style="display:flex;gap:12px;font-size:14.5px;line-height:1.75;color:#B7BFC9;"><span style="color:#4FD1B5;flex:none;">›</span><span><code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">related_code</code>: シンボル/ファイルを起点に双方向 BFS（深さ 1–3、上限 50）。import するもの・されるもの、定義・参照を一括展開</span></li>
+<li style="display:flex;gap:12px;font-size:14.5px;line-height:1.75;color:#B7BFC9;"><span style="color:#4FD1B5;flex:none;">›</span><span>コメント・文字列内の同名語は AST 段階で自然に除外されるため、文字列一致（grep）で起きる誤検出が構造的に起きない</span></li>
+</ul>
+<div style="display:inline-flex;align-items:center;gap:14px;background:#0D1116;border:1px solid #1E242D;border-radius:10px;padding:12px 18px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#99A1AD;">
+<span style="color:#5A626D;">実リポジトリでの抽出規模:</span>
+<span><span style="color:#8FE3D0;">defines</span> 390</span>
+<span style="color:#2A323D;">/</span>
+<span><span style="color:#8FE3D0;">imports</span> 418</span>
+<span style="color:#2A323D;">/</span>
+<span><span style="color:#8FE3D0;">references</span> 2260</span>
+</div>
+
+<h3 style="font-size:18px;font-weight:600;color:#E7E9EC;margin:40px 0 6px;letter-spacing:-0.01em;">全文検索 (BM25) — SQLite FTS5</h3>
+<p style="font-size:14.5px;line-height:1.8;color:#99A1AD;margin:0;">全文検索の BM25 は SQLite の全文検索エンジン FTS5（<code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">chunks_fts</code> 仮想テーブル）で動く。インデックスは DB 内に永続するため、起動時にコーパスをメモリへ載せる必要がない。FTS5 がまだ構築されていない DB を開いた場合は、接続時に自動でバックフィルする（再インデックス不要）。</p>
+</section>
+
+<section id="pipeline" data-section="pipeline" style="scroll-margin-top:28px;padding:52px 0;border-bottom:1px solid #161B22;">
+<div style="display:flex;align-items:baseline;gap:14px;margin-bottom:14px;">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#4FD1B5;">04</span>
+<h2 style="font-size:29px;font-weight:600;letter-spacing:-0.015em;margin:0;color:#EEF0F2;">検索パイプライン <span style="font-family:'IBM Plex Mono',monospace;font-size:15px;color:#69707B;font-weight:400;">search_code</span></h2>
+</div>
+<p style="font-size:15.5px;line-height:1.85;color:#99A1AD;margin:0 0 28px;">クエリは前処理を経て 2 系統で検索され、統合・再採点・品質フィルタを通って上位ヒットになる。</p>
+<figure class="mermaid-fig" style="margin:0 0 28px;background:#0B0E12;border:1px solid #1C232C;border-radius:14px;padding:28px 24px;">
+<div id="diagram-pipeline" style="min-height:280px;display:flex;align-items:center;justify-content:center;">
+<span style="color:#5A626D;font-size:13px;font-family:'IBM Plex Mono',monospace;animation:crPulse 1.6s ease-in-out infinite;">図を生成しています…</span>
+</div>
+</figure>
+<ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:13px;">
+<li style="display:flex;gap:12px;font-size:14.5px;line-height:1.75;color:#B7BFC9;"><span style="color:#4FD1B5;flex:none;font-weight:600;">ベクトル検索</span><span style="color:#69707B;flex:none;">—</span><span>fastembed（<code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">BAAI/bge-small-en-v1.5</code>、384 次元）の cosine 類似。意味の近さを捉える</span></li>
+<li style="display:flex;gap:12px;font-size:14.5px;line-height:1.75;color:#B7BFC9;"><span style="color:#4FD1B5;flex:none;font-weight:600;">BM25 検索</span><span style="color:#69707B;flex:none;">—</span><span>FTS5 の <code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">bm25()</code>。キーワード一致を捉える（小さいほど良い → 符号反転して統合）</span></li>
+<li style="display:flex;gap:12px;font-size:14.5px;line-height:1.75;color:#B7BFC9;"><span style="color:#4FD1B5;flex:none;font-weight:600;">RRF</span><span style="color:#69707B;flex:none;">—</span><span>2 系統の順位を Reciprocal Rank Fusion で統合</span></li>
+<li style="display:flex;gap:12px;font-size:14.5px;line-height:1.75;color:#B7BFC9;"><span style="color:#4FD1B5;flex:none;font-weight:600;">reranker</span><span style="color:#69707B;flex:none;">—</span><span>flashrank でクエリ-chunk の関連度を再採点（シングルトン常駐）</span></li>
+<li style="display:flex;gap:12px;font-size:14.5px;line-height:1.75;color:#B7BFC9;"><span style="color:#4FD1B5;flex:none;font-weight:600;">diversity cap</span><span style="color:#69707B;flex:none;">—</span><span>1 ファイルから最大 2 chunk まで → 結果の偏り防止</span></li>
+<li style="display:flex;gap:12px;font-size:14.5px;line-height:1.75;color:#B7BFC9;"><span style="color:#4FD1B5;flex:none;font-weight:600;">consensus guard</span><span style="color:#69707B;flex:none;">—</span><span>vector と BM25 の両方が上位に挙げた chunk を救済 → 取りこぼし防止</span></li>
+</ul>
+</section>
+
+<section id="codegraph" data-section="codegraph" style="scroll-margin-top:28px;padding:52px 0;border-bottom:1px solid #161B22;">
+<div style="display:flex;align-items:baseline;gap:14px;margin-bottom:28px;">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#4FD1B5;">05</span>
+<h2 style="font-size:29px;font-weight:600;letter-spacing:-0.015em;margin:0;color:#EEF0F2;">コードグラフの仕組み</h2>
+</div>
+
+<h3 style="font-size:18px;font-weight:600;color:#E7E9EC;margin:0 0 16px;letter-spacing:-0.01em;">edges 抽出（インデックス時）</h3>
+<p style="font-size:14.5px;line-height:1.8;color:#99A1AD;margin:0 0 24px;">import・定義・参照を tree-sitter で抽出し <code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">edges</code> テーブルに永続化。検索ヒットを起点に構造的に関連するコードを辿れる。</p>
+<figure class="mermaid-fig" style="margin:0 0 24px;background:#0B0E12;border:1px solid #1C232C;border-radius:14px;padding:28px 24px;">
+<div id="diagram-edges" style="min-height:200px;display:flex;align-items:center;justify-content:center;">
+<span style="color:#5A626D;font-size:13px;font-family:'IBM Plex Mono',monospace;animation:crPulse 1.6s ease-in-out infinite;">図を生成しています…</span>
+</div>
+</figure>
+<p style="font-size:14px;line-height:1.7;color:#8A929D;margin:0 0 14px;font-family:'IBM Plex Mono',monospace;"><code style="color:#8FE3D0;">edges</code> テーブル 1 行 = 1 関係</p>
+<div style="overflow-x:auto;border:1px solid #20262F;border-radius:12px;margin:0 0 8px;">
+<table style="width:100%;border-collapse:collapse;font-size:14px;">
+<thead><tr>
+<th style="text-align:left;padding:12px 18px;background:#13171E;color:#8A929D;font-weight:600;font-size:11.5px;letter-spacing:0.05em;text-transform:uppercase;border-bottom:1px solid #20262F;width:170px;">列</th>
+<th style="text-align:left;padding:12px 18px;background:#13171E;color:#8A929D;font-weight:600;font-size:11.5px;letter-spacing:0.05em;text-transform:uppercase;border-bottom:1px solid #20262F;">意味</th>
+</tr></thead>
+<tbody>
+<tr><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">id</td><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;">主キー（自動採番 INTEGER PRIMARY KEY AUTOINCREMENT）</td></tr>
+<tr><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">repo</td><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;">リポジトリ名</td></tr>
+<tr><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">src_kind / src</td><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;">起点（file または symbol）</td></tr>
+<tr><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">dst_kind / dst</td><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;">終点（file / symbol / external）</td></tr>
+<tr><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">edge_type</td><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;">imports / defines / references</td></tr>
+<tr><td style="padding:11px 18px;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">path / lineno</td><td style="padding:11px 18px;color:#B7BFC9;vertical-align:top;">出現位置</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3 style="font-size:18px;font-weight:600;color:#E7E9EC;margin:42px 0 16px;letter-spacing:-0.01em;">related_code の BFS 展開</h3>
+<figure class="mermaid-fig" style="margin:0 0 22px;background:#0B0E12;border:1px solid #1C232C;border-radius:14px;padding:28px 24px;">
+<div id="diagram-bfs" style="min-height:280px;display:flex;align-items:center;justify-content:center;">
+<span style="color:#5A626D;font-size:13px;font-family:'IBM Plex Mono',monospace;animation:crPulse 1.6s ease-in-out infinite;">図を生成しています…</span>
+</div>
+</figure>
+<div style="background:#0D1116;border-left:3px solid #4FD1B5;border-radius:0 10px 10px 0;padding:16px 20px;">
+<p style="font-size:14.5px;line-height:1.8;color:#B7BFC9;margin:0;">打ち切り時は <strong style="color:#E7E9EC;font-weight:600;">構造情報（import）を優先</strong> して残す。<code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">defines</code> が枠を食い潰して <code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">imports</code> が出ない問題への対策。</p>
+</div>
+
+<h3 style="font-size:18px;font-weight:600;color:#E7E9EC;margin:42px 0 16px;letter-spacing:-0.01em;">find_references のフォールバック</h3>
+<figure class="mermaid-fig" style="margin:0;background:#0B0E12;border:1px solid #1C232C;border-radius:14px;padding:28px 24px;">
+<div id="diagram-fallback" style="min-height:240px;display:flex;align-items:center;justify-content:center;">
+<span style="color:#5A626D;font-size:13px;font-family:'IBM Plex Mono',monospace;animation:crPulse 1.6s ease-in-out infinite;">図を生成しています…</span>
+</div>
+</figure>
+</section>
+
+<section id="files" data-section="files" style="scroll-margin-top:28px;padding:52px 0;border-bottom:1px solid #161B22;">
+<div style="display:flex;align-items:baseline;gap:14px;margin-bottom:26px;">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#4FD1B5;">06</span>
+<h2 style="font-size:29px;font-weight:600;letter-spacing:-0.015em;margin:0;color:#EEF0F2;">アーキテクチャ <span style="font-size:16px;color:#69707B;font-weight:400;">ファイル構成</span></h2>
+</div>
+<div style="overflow-x:auto;border:1px solid #20262F;border-radius:12px;">
+<table style="width:100%;border-collapse:collapse;font-size:14px;">
+<thead><tr>
+<th style="text-align:left;padding:12px 18px;background:#13171E;color:#8A929D;font-weight:600;font-size:11.5px;letter-spacing:0.05em;text-transform:uppercase;border-bottom:1px solid #20262F;width:170px;">ファイル</th>
+<th style="text-align:left;padding:12px 18px;background:#13171E;color:#8A929D;font-weight:600;font-size:11.5px;letter-spacing:0.05em;text-transform:uppercase;border-bottom:1px solid #20262F;">役割</th>
+</tr></thead>
+<tbody>
+<tr><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">server.py</td><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;">FastMCP サーバー。MCP ツール群と /admin/reindex を定義</td></tr>
+<tr><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">retrieval.py</td><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;">ハイブリッド検索（vector + FTS5 BM25 → RRF → rerank）、consensus guard、diversity cap、Search Debug</td></tr>
+<tr><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">graph.py</td><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;"><strong style="color:#E7E9EC;font-weight:600;">コードグラフ抽出 + 照会</strong>（edges 抽出 / find_refs / bfs_expand）</td></tr>
+<tr><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">indexer.py</td><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;">リポジトリ全量走査 → chunks / chunks_fts / edges を構築</td></tr>
+<tr><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">watcher.py</td><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;">watchdog でファイル変更を監視し、chunks / fts / edges を差分同期する常駐プロセス</td></tr>
+<tr><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">chunking.py</td><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;">tree-sitter CodeSplitter（fallback: 40 行ブロック）でファイルを chunk 分割</td></tr>
+<tr><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">hygiene.py</td><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;">.gitignore 準拠、サイズ/バイナリ/秘密情報フィルタリング</td></tr>
+<tr><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">observe.py</td><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;">全 MCP ツール呼び出しを data/logs/queries-YYYY-MM-DD.jsonl へ記録</td></tr>
+<tr><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">locking.py</td><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;">fcntl.flock による repo 単位の排他ロック（sync/index 直列化）</td></tr>
+<tr><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">security.py</td><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;">ホスト検証（loopback 強制）、ファイルパーミッション監査</td></tr>
+<tr><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">scripts/sync_repo.sh</td><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;">作業機 → サーバー機へ rsync 差分転送 + 差分インデックス起動</td></tr>
+<tr><td style="padding:11px 18px;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">eval/run.py</td><td style="padding:11px 18px;color:#B7BFC9;vertical-align:top;">recall@5 / MRR / レイテンシ計測の品質評価スクリプト</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section id="tools" data-section="tools" style="scroll-margin-top:28px;padding:52px 0;border-bottom:1px solid #161B22;">
+<div style="display:flex;align-items:baseline;gap:14px;margin-bottom:26px;">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#4FD1B5;">07</span>
+<h2 style="font-size:29px;font-weight:600;letter-spacing:-0.015em;margin:0;color:#EEF0F2;">MCP ツール一覧</h2>
+</div>
+<div style="overflow-x:auto;border:1px solid #20262F;border-radius:12px;">
+<table style="width:100%;border-collapse:collapse;font-size:14px;">
+<thead><tr>
+<th style="text-align:left;padding:12px 18px;background:#13171E;color:#8A929D;font-weight:600;font-size:11.5px;letter-spacing:0.05em;text-transform:uppercase;border-bottom:1px solid #20262F;width:185px;">ツール</th>
+<th style="text-align:left;padding:12px 18px;background:#13171E;color:#8A929D;font-weight:600;font-size:11.5px;letter-spacing:0.05em;text-transform:uppercase;border-bottom:1px solid #20262F;">説明</th>
+</tr></thead>
+<tbody>
+<tr><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">search_code</td><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;">ハイブリッド検索（vector + FTS5 BM25 + rerank）。lang, path_glob, modified_since（7d/24h/YYYY-MM-DD）, author フィルタ対応</td></tr>
+<tr><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">search_code_debug</td><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;">search_code と同一ランキング + 段階別スコア内訳（vector/bm25/rrf/rerank/diversity/consensus_guard）を返す診断ツール</td></tr>
+<tr><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">grep_code</td><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;">正規表現による全文検索（rg 優先、fallback で Python re）</td></tr>
+<tr><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">get_file_range</td><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;">ファイルの指定行範囲を取得（1-indexed、最大 300 行。リポ外パス拒否・秘密情報検査あり）</td></tr>
+<tr><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">find_references</td><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;">コードグラフ（edges）から定義/参照を種別付きで返す。グラフ未登録は grep 近似にフォールバック（approximate: true）</td></tr>
+<tr><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">related_code</td><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;">シンボル/ファイル起点の近傍展開（import・定義・参照の双方向 BFS、深さ 1–3、上限 50 件）</td></tr>
+<tr><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">list_symbols</td><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;">tree-sitter でファイル内の関数/クラス定義を列挙</td></tr>
+<tr><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">list_repos</td><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;">設定済みリポジトリと chunk 数・最終インデックス時刻を返す</td></tr>
+<tr><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">stats</td><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;">直近 N 日のクエリ集計（呼び出し数/レイテンシ/頻出クエリ）</td></tr>
+<tr><td style="padding:11px 18px;color:#D6A24F;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">POST /admin/reindex</td><td style="padding:11px 18px;color:#B7BFC9;vertical-align:top;">loopback のみ受付。非同期で indexer.py --repo &lt;name&gt; を起動</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section id="multirepo" data-section="multirepo" style="scroll-margin-top:28px;padding:52px 0;border-bottom:1px solid #161B22;">
+<div style="display:flex;align-items:baseline;gap:14px;margin-bottom:26px;">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#4FD1B5;">08</span>
+<h2 style="font-size:29px;font-weight:600;letter-spacing:-0.015em;margin:0;color:#EEF0F2;">マルチ repo 運用</h2>
+</div>
+<p style="font-size:15.5px;line-height:1.85;color:#B7BFC9;margin:0 0 28px;">複数の開発コンテナが 1 台のサーバを共有し、各自の repo だけを検索する。</p>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:32px;">
+<div style="background:#13171E;border:1px solid #20262F;border-radius:12px;padding:20px;">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#5B9BD5;letter-spacing:0.04em;margin-bottom:10px;">REPO 登録</div>
+<div style="font-size:15px;font-weight:600;color:#E7E9EC;margin-bottom:8px;">config.yaml</div>
+<p style="font-size:13.5px;line-height:1.75;color:#99A1AD;margin:0;"><code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">repos[]</code> に name / path / languages を追加。評価台 fastapi は通常運用から外し <code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">eval/config.eval.yaml</code> に分離。</p>
+</div>
+<div style="background:#13171E;border:1px solid #20262F;border-radius:12px;padding:20px;">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#4FD1B5;letter-spacing:0.04em;margin-bottom:10px;">接続宣言</div>
+<div style="font-size:15px;font-weight:600;color:#E7E9EC;margin-bottom:8px;">X-Repo ヘッダ</div>
+<p style="font-size:13.5px;line-height:1.75;color:#99A1AD;margin:0;">SSE は <code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">X-Repo</code> HTTP ヘッダで宣言。stdio は <code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">CODE_RAG_REPO</code> env。暗黙 default は廃止。</p>
+</div>
+<div style="background:#13171E;border:1px solid #20262F;border-radius:12px;padding:20px;">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#9B7BD4;letter-spacing:0.04em;margin-bottom:10px;">取り込み</div>
+<div style="font-size:15px;font-weight:600;color:#E7E9EC;margin-bottom:8px;">sync_repo.sh</div>
+<p style="font-size:13.5px;line-height:1.75;color:#99A1AD;margin:0;"><code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">scripts/sync_repo.sh &lt;repo&gt; &lt;src&gt;</code> で rsync 差分転送 + 差分インデックス。未変更 chunk は再 embed スキップ。</p>
+</div>
+</div>
+
+<ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;">
+<li style="display:flex;gap:12px;font-size:14.5px;line-height:1.75;color:#B7BFC9;"><span style="color:#4FD1B5;flex:none;">›</span><span><strong style="color:#E7E9EC;font-weight:600;">repo 引数省略時</strong>: 接続宣言の repo が使われる。明示すればそちらが優先</span></li>
+<li style="display:flex;gap:12px;font-size:14.5px;line-height:1.75;color:#B7BFC9;"><span style="color:#4FD1B5;flex:none;">›</span><span><strong style="color:#E7E9EC;font-weight:600;">宣言も引数も無い場合</strong>: <code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">repo_not_specified</code> エラー + available_repos</span></li>
+<li style="display:flex;gap:12px;font-size:14.5px;line-height:1.75;color:#B7BFC9;"><span style="color:#4FD1B5;flex:none;">›</span><span><strong style="color:#E7E9EC;font-weight:600;">検索契機の自動同期</strong> (任意): 作業機側 <code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">hooks/client/</code> の PreToolUse フックで検索直前に同期</span></li>
+<li style="display:flex;gap:12px;font-size:14.5px;line-height:1.75;color:#B7BFC9;"><span style="color:#4FD1B5;flex:none;">›</span><span><strong style="color:#E7E9EC;font-weight:600;">排他ロック</strong>: 同一 repo への同時同期は <code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">locking.py</code> (fcntl.flock) で直列化</span></li>
+</ul>
+</section>
+
+<section id="setup" data-section="setup" style="scroll-margin-top:28px;padding:52px 0;border-bottom:1px solid #161B22;">
+<div style="display:flex;align-items:baseline;gap:14px;margin-bottom:24px;">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#4FD1B5;">09</span>
+<h2 style="font-size:29px;font-weight:600;letter-spacing:-0.015em;margin:0;color:#EEF0F2;">セットアップ</h2>
+</div>
+<div style="background:#0B0E13;border:1px solid #1E242D;border-radius:12px;overflow:hidden;margin:0 0 18px;">
+<div style="display:flex;align-items:center;gap:7px;padding:10px 16px;border-bottom:1px solid #161B22;background:#0E1218;">
+<span style="width:11px;height:11px;border-radius:50%;background:#27313D;"></span>
+<span style="width:11px;height:11px;border-radius:50%;background:#27313D;"></span>
+<span style="width:11px;height:11px;border-radius:50%;background:#27313D;"></span>
+<span style="margin-left:8px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#69707B;letter-spacing:0.04em;">bash</span>
+</div>
+<pre data-lang="bash" style="margin:0;padding:18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.75;color:#C9D1D9;"><code id="code-setup"></code></pre>
+</div>
+<div style="background:#1C1808;border-left:3px solid #D6A24F;border-radius:0 10px 10px 0;padding:14px 20px;">
+<p style="font-size:14px;line-height:1.75;color:#D9CFB2;margin:0;"><strong style="color:#F0D9A9;font-weight:600;">注意:</strong> <code style="background:#241F10;border:1px solid #3a3320;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#F0D9A9;">eval/run.py</code> の label は位置引数。<code style="background:#241F10;border:1px solid #3a3320;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#F0D9A9;">--label foo</code> と書くとラベルが <code style="background:#241F10;border:1px solid #3a3320;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#F0D9A9;">--label</code> になる。</p>
+</div>
+</section>
+
+<section id="run" data-section="run" style="scroll-margin-top:28px;padding:52px 0;border-bottom:1px solid #161B22;">
+<div style="display:flex;align-items:baseline;gap:14px;margin-bottom:24px;">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#4FD1B5;">10</span>
+<h2 style="font-size:29px;font-weight:600;letter-spacing:-0.015em;margin:0;color:#EEF0F2;">サーバー起動 / 停止</h2>
+</div>
+<div style="background:#0B0E13;border:1px solid #1E242D;border-radius:12px;overflow:hidden;">
+<div style="display:flex;align-items:center;gap:7px;padding:10px 16px;border-bottom:1px solid #161B22;background:#0E1218;">
+<span style="width:11px;height:11px;border-radius:50%;background:#27313D;"></span>
+<span style="width:11px;height:11px;border-radius:50%;background:#27313D;"></span>
+<span style="width:11px;height:11px;border-radius:50%;background:#27313D;"></span>
+<span style="margin-left:8px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#69707B;letter-spacing:0.04em;">bash</span>
+</div>
+<pre data-lang="bash" style="margin:0;padding:18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.75;color:#C9D1D9;"><code id="code-run"></code></pre>
+</div>
+</section>
+
+<section id="security" data-section="security" style="scroll-margin-top:28px;padding:52px 0;border-bottom:1px solid #161B22;">
+<div style="display:flex;align-items:baseline;gap:14px;margin-bottom:26px;">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#4FD1B5;">11</span>
+<h2 style="font-size:29px;font-weight:600;letter-spacing:-0.015em;margin:0;color:#EEF0F2;">セキュリティ</h2>
+</div>
+<ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:14px;">
+<li style="display:flex;gap:12px;font-size:14.5px;line-height:1.75;color:#B7BFC9;"><span style="color:#4FD1B5;flex:none;">›</span><span><strong style="color:#E7E9EC;font-weight:600;">bind</strong>: config.yaml の <code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">server.host: 127.0.0.1</code> 以外では起動を拒否（<code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">CODE_RAG_ALLOW_UNSAFE_BIND=1</code> でのみ通過）</span></li>
+<li style="display:flex;gap:12px;font-size:14.5px;line-height:1.75;color:#B7BFC9;"><span style="color:#4FD1B5;flex:none;">›</span><span><strong style="color:#E7E9EC;font-weight:600;">パーミッション</strong>: data/ は 0700、DB・ログは 0600</span></li>
+<li style="display:flex;gap:12px;font-size:14.5px;line-height:1.75;color:#B7BFC9;"><span style="color:#4FD1B5;flex:none;">›</span><span><strong style="color:#E7E9EC;font-weight:600;">SSH トンネル</strong>: リモート接続は SSH トンネル経由。手順は <a href="CONNECT.md" style="color:#8FE3D0;text-decoration:underline;text-underline-offset:3px;">CONNECT.md</a> を参照</span></li>
+<li style="display:flex;gap:12px;font-size:14.5px;line-height:1.75;color:#B7BFC9;"><span style="color:#4FD1B5;flex:none;">›</span><span><strong style="color:#E7E9EC;font-weight:600;">bearer token 不採用</strong>: SSH トンネル前提のシングルユーザー設計。マルチユーザー ACL は未実装</span></li>
+<li style="display:flex;gap:12px;font-size:14.5px;line-height:1.75;color:#B7BFC9;"><span style="color:#4FD1B5;flex:none;">›</span><span><strong style="color:#E7E9EC;font-weight:600;">パストラバーサル防御</strong>: get_file_range / related_code はリポ外パスを拒否（resolve().relative_to 封じ込め）。import 解決もリポ外は external 扱いで edges に記録しない</span></li>
+<li style="display:flex;gap:12px;font-size:14.5px;line-height:1.75;color:#B7BFC9;"><span style="color:#4FD1B5;flex:none;">›</span><span><strong style="color:#E7E9EC;font-weight:600;">CONTEXT_TRUST</strong>: 検索結果に <code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">untrusted_repository_content</code> を付与し、prompt injection を下流に伝播させない</span></li>
+</ul>
+</section>
+
+<section id="ops" data-section="ops" style="scroll-margin-top:28px;padding:52px 0;border-bottom:1px solid #161B22;">
+<div style="display:flex;align-items:baseline;gap:14px;margin-bottom:22px;">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#4FD1B5;">12</span>
+<h2 style="font-size:29px;font-weight:600;letter-spacing:-0.015em;margin:0;color:#EEF0F2;">運用 <span style="font-family:'IBM Plex Mono',monospace;font-size:15px;color:#69707B;font-weight:400;">launchd</span></h2>
+</div>
+<p style="font-size:15px;line-height:1.85;color:#99A1AD;margin:0 0 20px;">サーバー機の再起動後に自動復帰させるには launchd を使う。</p>
+<div style="background:#0B0E13;border:1px solid #1E242D;border-radius:12px;overflow:hidden;margin:0 0 32px;">
+<div style="display:flex;align-items:center;gap:7px;padding:10px 16px;border-bottom:1px solid #161B22;background:#0E1218;">
+<span style="width:11px;height:11px;border-radius:50%;background:#27313D;"></span>
+<span style="width:11px;height:11px;border-radius:50%;background:#27313D;"></span>
+<span style="width:11px;height:11px;border-radius:50%;background:#27313D;"></span>
+<span style="margin-left:8px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#69707B;letter-spacing:0.04em;">bash</span>
+</div>
+<pre data-lang="bash" style="margin:0;padding:18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.75;color:#C9D1D9;"><code id="code-launchd"></code></pre>
+</div>
+<div style="background:#1C1808;border-left:3px solid #D6A24F;border-radius:0 10px 10px 0;padding:14px 20px;margin:0 0 36px;">
+<p style="font-size:14px;line-height:1.75;color:#D9CFB2;margin:0;">launchd サービスの再起動は <code style="background:#241F10;border:1px solid #3a3320;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#F0D9A9;">eval/run.py</code> が recall@5 ≥ 0.92 をクリアした後にのみ行う。</p>
+</div>
+
+<h3 style="font-size:17px;font-weight:600;color:#E7E9EC;margin:0 0 8px;letter-spacing:-0.01em;">post-commit hook</h3>
+<p style="font-size:14.5px;line-height:1.8;color:#99A1AD;margin:0 0 18px;">commit 後に強制 reindex するための保険フック。</p>
+<div style="background:#0B0E13;border:1px solid #1E242D;border-radius:12px;overflow:hidden;margin:0 0 18px;">
+<div style="display:flex;align-items:center;gap:7px;padding:10px 16px;border-bottom:1px solid #161B22;background:#0E1218;">
+<span style="width:11px;height:11px;border-radius:50%;background:#27313D;"></span>
+<span style="width:11px;height:11px;border-radius:50%;background:#27313D;"></span>
+<span style="width:11px;height:11px;border-radius:50%;background:#27313D;"></span>
+<span style="margin-left:8px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#69707B;letter-spacing:0.04em;">bash</span>
+</div>
+<pre data-lang="bash" style="margin:0;padding:18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.75;color:#C9D1D9;"><code id="code-hook"></code></pre>
+</div>
+<div style="background:#0D1116;border-left:3px solid #5B9BD5;border-radius:0 10px 10px 0;padding:16px 20px;">
+<p style="font-size:14.5px;line-height:1.8;color:#B7BFC9;margin:0;">watcher は chunks / chunks_fts / edges を <strong style="color:#E7E9EC;font-weight:600;">まとめて同じタイミングで</strong> 更新する（同一トランザクションで同期）。変更の検知から反映までは、デバウンス（<code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">DEBOUNCE_SECONDS=1.0</code>）+ 再 chunk + 埋め込み再計算を挟む。実リポジトリでの実測で end-to-end <strong style="color:#8FE3D0;font-weight:600;">約 10 秒</strong>（環境・ファイルサイズ依存）。</p>
+</div>
+</section>
+
+<section id="intel" data-section="intel" style="scroll-margin-top:28px;padding:52px 0;border-bottom:1px solid #161B22;">
+<div style="display:flex;align-items:baseline;gap:14px;margin-bottom:22px;">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#4FD1B5;">13</span>
+<h2 style="font-size:29px;font-weight:600;letter-spacing:-0.015em;margin:0;color:#EEF0F2;">Intel Mac 制約</h2>
+</div>
+<p style="font-size:15px;line-height:1.85;color:#B7BFC9;margin:0 0 24px;">依存パッケージのバージョンピンは <strong style="color:#F0B9C6;font-weight:600;">変更禁止</strong>。詳細は <a href="NOTES.md" style="color:#8FE3D0;text-decoration:underline;text-underline-offset:3px;">NOTES.md</a> を参照。</p>
+<div style="overflow-x:auto;border:1px solid #20262F;border-radius:12px;">
+<table style="width:100%;border-collapse:collapse;font-size:14px;">
+<thead><tr>
+<th style="text-align:left;padding:12px 18px;background:#13171E;color:#8A929D;font-weight:600;font-size:11.5px;letter-spacing:0.05em;text-transform:uppercase;border-bottom:1px solid #20262F;width:150px;">パッケージ</th>
+<th style="text-align:left;padding:12px 18px;background:#13171E;color:#8A929D;font-weight:600;font-size:11.5px;letter-spacing:0.05em;text-transform:uppercase;border-bottom:1px solid #20262F;width:130px;">ピン</th>
+<th style="text-align:left;padding:12px 18px;background:#13171E;color:#8A929D;font-weight:600;font-size:11.5px;letter-spacing:0.05em;text-transform:uppercase;border-bottom:1px solid #20262F;">理由</th>
+</tr></thead>
+<tbody>
+<tr><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">onnxruntime</td><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#D6A24F;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">==1.17.3</td><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;">1.18+ は Intel Mac（x86_64）非対応</td></tr>
+<tr><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">numpy</td><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#D6A24F;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">&lt;2.0</td><td style="padding:11px 18px;border-bottom:1px solid #161B22;color:#B7BFC9;vertical-align:top;">onnxruntime 1.17.3 との ABI 互換性（numpy 2 で _ARRAY_API not found 即死）</td></tr>
+<tr><td style="padding:11px 18px;color:#8FE3D0;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">Python</td><td style="padding:11px 18px;color:#D6A24F;vertical-align:top;font-family:'IBM Plex Mono',monospace;font-size:13px;">&gt;=3.12,&lt;3.13</td><td style="padding:11px 18px;color:#B7BFC9;vertical-align:top;">fastembed / onnxruntime の動作確認済みバージョン</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section id="eval" data-section="eval" style="scroll-margin-top:28px;padding:52px 0 20px;">
+<div style="display:flex;align-items:baseline;gap:14px;margin-bottom:24px;">
+<span style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:#4FD1B5;">14</span>
+<h2 style="font-size:29px;font-weight:600;letter-spacing:-0.015em;margin:0;color:#EEF0F2;">評価</h2>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:12px;margin:0 0 28px;">
+<div style="flex:1;min-width:150px;background:#13171E;border:1px solid #20262F;border-radius:12px;padding:18px 20px;">
+<div style="font-size:11px;color:#69707B;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;font-family:'IBM Plex Mono',monospace;">recall@5</div>
+<div style="font-size:30px;font-weight:700;color:#4FD1B5;letter-spacing:-0.02em;">0.95</div>
+<div style="font-size:12px;color:#69707B;margin-top:4px;font-family:'IBM Plex Mono',monospace;">19 / 20</div>
+</div>
+<div style="flex:1;min-width:150px;background:#13171E;border:1px solid #20262F;border-radius:12px;padding:18px 20px;">
+<div style="font-size:11px;color:#69707B;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;font-family:'IBM Plex Mono',monospace;">MRR</div>
+<div style="font-size:30px;font-weight:700;color:#E7E9EC;letter-spacing:-0.02em;">0.83</div>
+<div style="font-size:12px;color:#69707B;margin-top:4px;font-family:'IBM Plex Mono',monospace;">mean reciprocal rank</div>
+</div>
+<div style="flex:1;min-width:150px;background:#13171E;border:1px solid #20262F;border-radius:12px;padding:18px 20px;">
+<div style="font-size:11px;color:#69707B;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;font-family:'IBM Plex Mono',monospace;">avg latency</div>
+<div style="font-size:30px;font-weight:700;color:#E7E9EC;letter-spacing:-0.02em;">≈55<span style="font-size:16px;color:#69707B;font-weight:500;">ms</span></div>
+<div style="font-size:12px;color:#69707B;margin-top:4px;font-family:'IBM Plex Mono',monospace;">per query</div>
+</div>
+</div>
+<div style="background:#0B0E13;border:1px solid #1E242D;border-radius:12px;overflow:hidden;margin:0 0 22px;">
+<div style="display:flex;align-items:center;gap:7px;padding:10px 16px;border-bottom:1px solid #161B22;background:#0E1218;">
+<span style="width:11px;height:11px;border-radius:50%;background:#27313D;"></span>
+<span style="width:11px;height:11px;border-radius:50%;background:#27313D;"></span>
+<span style="width:11px;height:11px;border-radius:50%;background:#27313D;"></span>
+<span style="margin-left:8px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#69707B;letter-spacing:0.04em;">bash</span>
+</div>
+<pre data-lang="bash" style="margin:0;padding:18px;overflow-x:auto;font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.75;color:#C9D1D9;"><code id="code-eval"></code></pre>
+</div>
+<ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:14px;">
+<li style="display:flex;gap:12px;font-size:14.5px;line-height:1.75;color:#B7BFC9;"><span style="color:#4FD1B5;flex:none;">›</span><span><strong style="color:#E7E9EC;font-weight:600;">ゲート条件</strong>: recall@5 ≥ 0.92。未達の場合はマージ禁止（eval/run.py は計測・記録のみ。閾値はスクリプトではなく運用ルールとして守る）</span></li>
+<li style="display:flex;gap:12px;font-size:14.5px;line-height:1.75;color:#B7BFC9;"><span style="color:#4FD1B5;flex:none;">›</span><span><code style="background:#181D25;border:1px solid #262D38;border-radius:5px;padding:1.5px 6px;font-family:'IBM Plex Mono',monospace;font-size:0.84em;color:#8FE3D0;">chunking.py</code> の挙動変更は chunk 数を変えるため eval 比較が壊れる。変更時は必ず計測すること</span></li>
+<li style="display:flex;gap:12px;font-size:14.5px;line-height:1.75;color:#B7BFC9;"><span style="color:#4FD1B5;flex:none;">›</span><span>全文検索（FTS5）とコードグラフ（edges）は検索スコアのランキングには混ざらない設計。検索品質はこれらと独立に保たれる</span></li>
+</ul>
+</section>
+
+<footer style="padding:36px 0 0;border-top:1px solid #161B22;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+<div style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#5A626D;">code-rag · CodeHound Intel Edition</div>
+<div style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#5A626D;">127.0.0.1:8765 · offline · single-user</div>
+</footer>
+
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  diagrams() {
+    return {
+      'diagram-architecture': `flowchart LR
+  subgraph Client["MCP クライアント (Claude Code 等)"]
+    C["ツール呼び出し"]
+  end
+  subgraph Server["code-rag サーバー · 127.0.0.1:8765"]
+    S["server.py<br/>FastMCP"]
+    R["retrieval.py<br/>ハイブリッド検索"]
+    G["graph.py<br/>コードグラフ"]
+    O["observe.py<br/>クエリログ"]
+  end
+  subgraph Storage["SQLite · code_rag.db"]
+    T1[("chunks<br/>本体 + vector")]
+    T2[("chunks_fts<br/>FTS5 索引")]
+    T3[("edges<br/>import / 定義 / 参照")]
+  end
+  subgraph Background["常駐インデクサ"]
+    I["indexer.py<br/>全量構築"]
+    W["watcher.py<br/>差分同期"]
+  end
+  C -->|SSE| S
+  S --> R
+  S --> G
+  S --> O
+  R --> T1
+  R --> T2
+  G --> T3
+  I --> T1
+  I --> T2
+  I --> T3
+  W --> T1
+  W --> T2
+  W --> T3
+  classDef client fill:#16263B,stroke:#5B9BD5,color:#C5DBF5
+  classDef server fill:#103027,stroke:#46C193,color:#A9E8C9
+  classDef storage fill:#2E2613,stroke:#D6A24F,color:#F0DBA9
+  classDef bg fill:#241A38,stroke:#9B7BD4,color:#D6C6F0
+  class C client
+  class S,R,G,O server
+  class T1,T2,T3 storage
+  class I,W bg
+  %% ===== Arrow Colors =====
+  linkStyle 0 stroke:#2196F3,stroke-width:2px,color:#2196F3
+  linkStyle 1 stroke:#43A047,stroke-width:1px
+  linkStyle 2 stroke:#43A047,stroke-width:1px
+  linkStyle 3 stroke:#8E24AA,stroke-width:1px
+  linkStyle 4 stroke:#00ACC1,stroke-width:1px
+  linkStyle 5 stroke:#00ACC1,stroke-width:1px
+  linkStyle 6 stroke:#FB8C00,stroke-width:1px
+  linkStyle 7 stroke:#EF6C00,stroke-width:1px
+  linkStyle 8 stroke:#EF6C00,stroke-width:1px
+  linkStyle 9 stroke:#EF6C00,stroke-width:1px
+  linkStyle 10 stroke:#E53935,stroke-width:1px,stroke-dasharray:5 3
+  linkStyle 11 stroke:#E53935,stroke-width:1px,stroke-dasharray:5 3
+  linkStyle 12 stroke:#E53935,stroke-width:1px,stroke-dasharray:5 3
+  `,
+
+      'diagram-pipeline': `flowchart TD
+  Q["クエリ"] --> PP["preprocess_query<br/>トークン化"]
+  PP --> V["ベクトル検索<br/>fastembed cosine"]
+  PP --> B["BM25 検索<br/>FTS5 bm25"]
+  V --> RRF["RRF 統合<br/>k = 60"]
+  B --> RRF
+  RRF --> RR["flashrank<br/>reranker"]
+  RR --> DIV["diversity cap<br/>max 2 chunks / file"]
+  DIV --> CG["consensus guard<br/>両系統合意を救済"]
+  CG --> OUT["上位ヒット返却"]
+  classDef input fill:#16263B,stroke:#5B9BD5,color:#C5DBF5
+  classDef search fill:#103027,stroke:#46C193,color:#A9E8C9
+  classDef ranking fill:#241A38,stroke:#9B7BD4,color:#D6C6F0
+  classDef quality fill:#2E2613,stroke:#D6A24F,color:#F0DBA9
+  classDef output fill:#321A22,stroke:#D45B79,color:#F0B9C6
+  class Q,PP input
+  class V,B search
+  class RRF,RR ranking
+  class DIV,CG quality
+  class OUT output
+  %% ===== Arrow Colors =====
+  linkStyle 0 stroke:#5B9BD5,stroke-width:1px
+  linkStyle 1 stroke:#46C193,stroke-width:1px
+  linkStyle 2 stroke:#46C193,stroke-width:1px
+  linkStyle 3 stroke:#9B7BD4,stroke-width:1px
+  linkStyle 4 stroke:#9B7BD4,stroke-width:1px
+  linkStyle 5 stroke:#9B7BD4,stroke-width:1px
+  linkStyle 6 stroke:#D6A24F,stroke-width:1px
+  linkStyle 7 stroke:#D6A24F,stroke-width:1px
+  linkStyle 8 stroke:#D45B79,stroke-width:1px
+  `,
+
+      'diagram-edges': `flowchart LR
+  F["ソースファイル"] --> TS["tree-sitter<br/>パース"]
+  TS --> IM["import / from-import<br/>モジュール解決"]
+  TS --> DF["関数・クラス定義<br/>_extract_symbols"]
+  TS --> RF["identifier / call<br/>+ クラス継承"]
+  IM -->|"ファイル間 imports (リポ外は external)"| E[("edges")]
+  DF -->|"defines"| E
+  RF -->|"references"| E
+  classDef source fill:#16263B,stroke:#5B9BD5,color:#C5DBF5
+  classDef parse fill:#103027,stroke:#46C193,color:#A9E8C9
+  classDef extract fill:#2E2613,stroke:#D6A24F,color:#F0DBA9
+  classDef out fill:#321A22,stroke:#D45B79,color:#F0B9C6
+  class F source
+  class TS parse
+  class IM,DF,RF extract
+  class E out
+  %% ===== Arrow Colors =====
+  linkStyle 0 stroke:#5B9BD5,stroke-width:2px
+  linkStyle 1 stroke:#46C193,stroke-width:1px
+  linkStyle 2 stroke:#46C193,stroke-width:1px
+  linkStyle 3 stroke:#46C193,stroke-width:1px
+  linkStyle 4 stroke:#1E88E5,stroke-width:1px
+  linkStyle 5 stroke:#FB8C00,stroke-width:1px
+  linkStyle 6 stroke:#8E24AA,stroke-width:1px,stroke-dasharray:5 2
+  `,
+
+      'diagram-bfs': `flowchart TD
+  T["起点: シンボル / ファイル"] --> RES{"解決"}
+  RES -->|"src / path 一致"| FILE["ファイルノード"]
+  RES -->|"defines dst 一致"| SYM["シンボルノード"]
+  RES -->|"不一致"| MISS["target_not_found"]
+  FILE --> BFS["双方向 BFS<br/>順: imports / defines / references<br/>逆: imported_by / defined_in / referenced_by"]
+  SYM --> BFS
+  BFS --> PRIO["ホップ内 priority ソート<br/>imports(0) &lt; defines(1) &lt; references(2)"]
+  PRIO --> CAP["深さ 1–3 / 上限 50 で打ち切り<br/>visited で循環抑止 · external で終端"]
+  CAP --> OUT["近傍ノード返却"]
+  classDef input fill:#16263B,stroke:#5B9BD5,color:#C5DBF5
+  classDef resolve fill:#103027,stroke:#46C193,color:#A9E8C9
+  classDef search fill:#241A38,stroke:#9B7BD4,color:#D6C6F0
+  classDef control fill:#2E2613,stroke:#D6A24F,color:#F0DBA9
+  classDef output fill:#103027,stroke:#46C193,color:#A9E8C9
+  classDef miss fill:#321A22,stroke:#D45B79,color:#F0B9C6
+  class T input
+  class RES resolve
+  class FILE,SYM resolve
+  class BFS search
+  class PRIO,CAP control
+  class OUT output
+  class MISS miss`,
+
+      'diagram-fallback': `flowchart TD
+  S["symbol"] --> GQ["graph.find_refs<br/>edges 照会"]
+  GQ -->|"ヒット"| GR["定義 / 参照を種別付き返却<br/>approximate: false"]
+  GQ -->|"0 件"| GREP["grep フォールバック"]
+  GREP -->|"ヒット"| AR["approximate: true<br/>reason: graph_miss"]
+  GQ -->|"例外"| GREP2["grep フォールバック"]
+  GREP2 --> AE["approximate: true<br/>reason: graph_error"]
+  classDef input fill:#16263B,stroke:#5B9BD5,color:#C5DBF5
+  classDef search fill:#241A38,stroke:#9B7BD4,color:#D6C6F0
+  classDef good fill:#103027,stroke:#46C193,color:#A9E8C9
+  classDef control fill:#2E2613,stroke:#D6A24F,color:#F0DBA9
+  classDef warn fill:#321A22,stroke:#D45B79,color:#F0B9C6
+  class S input
+  class GQ search
+  class GR good
+  class GREP,GREP2 control
+  class AR,AE warn`
+    };
+  }
+
+  codeBlocks() {
+    return {
+      'code-setup': `cd ~/code-rag
+
+# 1. 依存インストール（初回は bge-small モデルのダウンロードあり）
+uv sync
+
+# 2. インデックス構築（chunks + chunks_fts + edges を一括生成）
+#    config.yaml の repos[].name を指定（省略時は全 repo）
+uv run python indexer.py --repo my-project
+
+# 3. 品質計測（検索ランキングに触る変更は計測必須。ゲート = recall@5 ≥ 0.92）
+uv run python eval/run.py <label>
+# 例: uv run python eval/run.py baseline
+# 引数なし uv run python eval/run.py は評価台 fastapi (DB repo "default") を計測する
+# 結果は eval/results/ に保存される`,
+
+      'code-run': `# 手動起動
+uv run python server.py --transport sse
+
+# バックグラウンド起動（launchd 未使用時）
+nohup uv run python server.py > data/logs/server.log 2>&1 & echo $! > data/server.pid
+
+# 停止
+kill $(cat ~/code-rag/data/server.pid)
+
+# 起動確認
+curl -sS -o /dev/null -w "%{http_code}\\n" http://localhost:8765/sse --max-time 2
+# → 200`,
+
+      'code-launchd': `# server
+cp ~/code-rag/scripts/launch_agent.plist ~/Library/LaunchAgents/com.local.code-rag.plist
+launchctl load ~/Library/LaunchAgents/com.local.code-rag.plist
+
+# watcher（差分インデックス常駐プロセス）
+cp ~/code-rag/scripts/launch_agent_watcher.plist ~/Library/LaunchAgents/com.local.code-rag-watcher.plist
+launchctl load ~/Library/LaunchAgents/com.local.code-rag-watcher.plist
+
+# 停止
+launchctl unload ~/Library/LaunchAgents/com.local.code-rag.plist
+launchctl unload ~/Library/LaunchAgents/com.local.code-rag-watcher.plist`,
+
+      'code-hook': `# 対象リポジトリで実行
+ln -s ~/code-rag/hooks/post-commit .git/hooks/post-commit
+chmod +x .git/hooks/post-commit
+
+# config.yaml の repos[].name と一致しない場合
+export CODE_RAG_REPO=<repo-name>`,
+
+      'code-eval': `uv run python eval/run.py <label>
+# 引数なし uv run python eval/run.py は評価台 fastapi (DB repo "default") を計測する`
+    };
+  }
+
+  renderCode() {
+    const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const blocks = this.codeBlocks();
+    for (const id in blocks) {
+      const el = document.getElementById(id);
+      if (!el) continue;
+      const html = blocks[id].split('\n').map((line) => {
+        if (line.trim() === '') return '';
+        if (/^\s*#/.test(line)) return '<span style="color:#5C6675;font-style:italic;">' + esc(line) + '</span>';
+        const m = line.match(/^(\s*)(\S+)([\s\S]*)$/);
+        if (m) return esc(m[1]) + '<span style="color:#6FD0BC;">' + esc(m[2]) + '</span>' + esc(m[3]);
+        return esc(line);
+      }).join('\n');
+      el.innerHTML = html;
+    }
+  }
+
+  async loadMermaid() {
+    if (window.mermaid) return window.mermaid;
+    const mod = await import('https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs');
+    window.mermaid = mod.default;
+    return window.mermaid;
+  }
+
+  async renderDiagrams() {
+    let mermaid;
+    try {
+      mermaid = await this.loadMermaid();
+    } catch (e) {
+      console.warn('mermaid load failed', e);
+      return;
+    }
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: 'loose',
+      theme: 'base',
+      fontFamily: "'IBM Plex Sans JP', sans-serif",
+      themeVariables: {
+        fontFamily: "'IBM Plex Sans JP', sans-serif",
+        fontSize: '13.5px',
+        lineColor: '#48515E',
+        textColor: '#C3CAD3',
+        mainBkg: '#13171E',
+        nodeBorder: '#2A323D',
+        clusterBkg: 'rgba(120,140,165,0.05)',
+        clusterBorder: '#283039',
+        edgeLabelBackground: '#0B0E12',
+        titleColor: '#9AA2AD',
+        nodeTextColor: '#C3CAD3'
+      },
+      flowchart: { htmlLabels: true, curve: 'basis', padding: 14, nodeSpacing: 40, rankSpacing: 50, useMaxWidth: true }
+    });
+    const defs = this.diagrams();
+    for (const id in defs) {
+      const host = document.getElementById(id);
+      if (!host) continue;
+      try {
+        const { svg } = await mermaid.render(id + '__svg', defs[id]);
+        host.innerHTML = svg;
+      } catch (err) {
+        console.warn('mermaid render failed:', id, err);
+        host.innerHTML = '<div style="color:#69707B;font-size:13px;font-family:monospace;padding:24px;">図の描画に失敗しました</div>';
+      }
+    }
+  }
+
+  setupScrollSpy() {
+    const links = Array.from(document.querySelectorAll('[data-nav]'));
+    if (!links.length) return;
+    const setActive = (id) => {
+      links.forEach((l) => {
+        const on = l.getAttribute('data-nav') === id;
+        l.style.color = on ? '#4FD1B5' : '#99A1AD';
+        l.style.background = on ? 'rgba(79,209,181,0.10)' : 'transparent';
+        l.style.borderLeftColor = on ? '#4FD1B5' : 'transparent';
+        l.style.fontWeight = on ? '600' : '500';
+      });
+    };
+    const sections = links
+      .map((l) => document.getElementById(l.getAttribute('data-nav')))
+      .filter(Boolean);
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) setActive(e.target.id); });
+    }, { rootMargin: '-8% 0px -78% 0px', threshold: 0 });
+    sections.forEach((s) => obs.observe(s));
+  }
+
+  componentDidMount() {
+    try { this.renderCode(); } catch (e) { console.warn(e); }
+    try { this.setupScrollSpy(); } catch (e) { console.warn(e); }
+    this.renderDiagrams();
+  }
+}
+</script>
+</body>
+</html>

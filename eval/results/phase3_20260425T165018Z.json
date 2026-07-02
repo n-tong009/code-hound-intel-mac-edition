@@ -1,0 +1,691 @@
+{
+  "phase": "phase3",
+  "timestamp": "20260425T165018Z",
+  "recall_at_5": 0.7,
+  "mrr": 0.51,
+  "recall_hits": 14,
+  "total": 20,
+  "avg_latency_ms": 2793.3124230024987,
+  "details": [
+    {
+      "id": "q01",
+      "query": "dependency injection resolution solve dependencies",
+      "recall": true,
+      "rank": 1,
+      "latency_ms": 4845.535408006981,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/dependencies/utils.py",
+          "symbol": "solve_dependencies",
+          "score": 0.8979440927505493
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/dependencies/utils.py",
+          "symbol": "solve_dependencies",
+          "score": 0.7450206875801086
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/param_functions.py",
+          "symbol": "Depends",
+          "score": 0.012331847101449966
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/dependencies/models.py",
+          "symbol": "Dependant",
+          "score": 0.006455643568187952
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/dependencies/tutorial008_py310.py",
+          "symbol": "nan",
+          "score": 0.0022262195125222206
+        }
+      ]
+    },
+    {
+      "id": "q02",
+      "query": "request body validation parsing pydantic",
+      "recall": true,
+      "rank": 3,
+      "latency_ms": 2860.1527270220686,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/handling_errors/tutorial005_py310.py",
+          "symbol": "nan",
+          "score": 0.956092119216919
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/openapi/utils.py",
+          "symbol": "nan",
+          "score": 0.7668789625167847
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/dependencies/utils.py",
+          "symbol": "nan",
+          "score": 0.4918614327907562
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/dependencies/utils.py",
+          "symbol": "nan",
+          "score": 0.14211156964302063
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/openapi/utils.py",
+          "symbol": "nan",
+          "score": 0.14129775762557983
+        }
+      ]
+    },
+    {
+      "id": "q03",
+      "query": "generate OpenAPI schema operation paths",
+      "recall": true,
+      "rank": 1,
+      "latency_ms": 2887.1605019958224,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/openapi/utils.py",
+          "symbol": "get_openapi_path",
+          "score": 0.9831798076629639
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/openapi/utils.py",
+          "symbol": "get_openapi_path",
+          "score": 0.9834628701210022
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/utils.py",
+          "symbol": "nan",
+          "score": 0.6960322856903076
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/scripts/playwright/separate_openapi_schemas/image04.py",
+          "symbol": "nan",
+          "score": 0.4964480698108673
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/scripts/playwright/separate_openapi_schemas/image03.py",
+          "symbol": "nan",
+          "score": 0.4923913776874542
+        }
+      ]
+    },
+    {
+      "id": "q04",
+      "query": "WebSocket route registration handler session",
+      "recall": false,
+      "rank": null,
+      "latency_ms": 2888.545887020882,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/custom_request_and_route/tutorial002_an_py310.py",
+          "symbol": "nan",
+          "score": 0.004354821052402258
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/custom_request_and_route/tutorial002_py310.py",
+          "symbol": "nan",
+          "score": 0.0025686754379421473
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/custom_request_and_route/tutorial003_py310.py",
+          "symbol": "nan",
+          "score": 0.0008987156907096505
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/custom_request_and_route/tutorial001_py310.py",
+          "symbol": "nan",
+          "score": 0.0006439845310524106
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/path_operation_advanced_configuration/tutorial002_py310.py",
+          "symbol": "nan",
+          "score": 2.639101876411587e-05
+        }
+      ]
+    },
+    {
+      "id": "q05",
+      "query": "HTTP exception handler validation error response",
+      "recall": true,
+      "rank": 3,
+      "latency_ms": 2324.5080999913625,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/handling_errors/tutorial004_py310.py",
+          "symbol": "nan",
+          "score": 0.9958940744400024
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/handling_errors/tutorial006_py310.py",
+          "symbol": "nan",
+          "score": 0.9952675104141235
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/exception_handlers.py",
+          "symbol": "nan",
+          "score": 0.9615587592124939
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/handling_errors/tutorial005_py310.py",
+          "symbol": "nan",
+          "score": 0.9367801547050476
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/exceptions.py",
+          "symbol": "nan",
+          "score": 0.7110209465026855
+        }
+      ]
+    },
+    {
+      "id": "q06",
+      "query": "OAuth2 password bearer authentication flow token",
+      "recall": true,
+      "rank": 1,
+      "latency_ms": 2492.7995420002844,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/oauth2.py",
+          "symbol": "nan",
+          "score": 0.9974307417869568
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/oauth2.py",
+          "symbol": "nan",
+          "score": 0.9959608912467957
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/security/tutorial003_py310.py",
+          "symbol": "nan",
+          "score": 0.3879774510860443
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/security/tutorial005_py310.py",
+          "symbol": "nan",
+          "score": 0.22885340452194214
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/http.py",
+          "symbol": "nan",
+          "score": 0.1904766708612442
+        }
+      ]
+    },
+    {
+      "id": "q07",
+      "query": "HTTP Bearer token authorization header security",
+      "recall": true,
+      "rank": 1,
+      "latency_ms": 2317.5296560220886,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/http.py",
+          "symbol": "nan",
+          "score": 0.9988856911659241
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/http.py",
+          "symbol": "HTTPAuthorizationCredentials",
+          "score": 0.998752236366272
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/oauth2.py",
+          "symbol": "nan",
+          "score": 0.9818679094314575
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/oauth2.py",
+          "symbol": "OAuth2",
+          "score": 0.9677151441574097
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/security/tutorial005_py310.py",
+          "symbol": "nan",
+          "score": 0.9472615122795105
+        }
+      ]
+    },
+    {
+      "id": "q08",
+      "query": "API key header query cookie authentication",
+      "recall": true,
+      "rank": 1,
+      "latency_ms": 2316.420160990674,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/api_key.py",
+          "symbol": "nan",
+          "score": 0.9853615760803223
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/api_key.py",
+          "symbol": "nan",
+          "score": 0.9850794076919556
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/oauth2.py",
+          "symbol": "__init__",
+          "score": 0.13377998769283295
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/oauth2.py",
+          "symbol": "OAuth2",
+          "score": 0.07167923450469971
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/http.py",
+          "symbol": "nan",
+          "score": 0.034283969551324844
+        }
+      ]
+    },
+    {
+      "id": "q09",
+      "query": "serialize response endpoint handler request",
+      "recall": false,
+      "rank": null,
+      "latency_ms": 2932.7119549852796,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/responses.py",
+          "symbol": "nan",
+          "score": 0.020041577517986298
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/responses.py",
+          "symbol": "nan",
+          "score": 0.015495078638195992
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/middleware/tutorial001_py310.py",
+          "symbol": "nan",
+          "score": 7.41223047953099e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/custom_response/tutorial004_py310.py",
+          "symbol": "nan",
+          "score": 2.238587876490783e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/websockets_/tutorial003_py310.py",
+          "symbol": "nan",
+          "score": 0.00014169697533361614
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "query": "background task execution async",
+      "recall": true,
+      "rank": 3,
+      "latency_ms": 2386.17107400205,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/background_tasks/tutorial002_an_py310.py",
+          "symbol": "nan",
+          "score": 0.9037142395973206
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/background_tasks/tutorial002_py310.py",
+          "symbol": "nan",
+          "score": 0.8968875408172607
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/background.py",
+          "symbol": "BackgroundTasks",
+          "score": 0.8950800895690918
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/background_tasks/tutorial001_py310.py",
+          "symbol": "nan",
+          "score": 0.8525845408439636
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/dependencies/utils.py",
+          "symbol": "solve_dependencies",
+          "score": 0.28460437059402466
+        }
+      ]
+    },
+    {
+      "id": "q11",
+      "query": "CORS middleware cross origin resource sharing",
+      "recall": true,
+      "rank": 2,
+      "latency_ms": 2408.165751985507,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/cors/tutorial001_py310.py",
+          "symbol": "nan",
+          "score": 0.8200135827064514
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/middleware/cors.py",
+          "symbol": "nan",
+          "score": 0.1459004431962967
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/middleware/httpsredirect.py",
+          "symbol": "nan",
+          "score": 3.2683870813343674e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/middleware/__init__.py",
+          "symbol": "nan",
+          "score": 3.873051537084393e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/advanced_middleware/tutorial002_py310.py",
+          "symbol": "nan",
+          "score": 3.6020883271703497e-05
+        }
+      ]
+    },
+    {
+      "id": "q12",
+      "query": "path parameter query parameter extraction request",
+      "recall": false,
+      "rank": null,
+      "latency_ms": 2899.2176720057614,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/param_functions.py",
+          "symbol": "nan",
+          "score": 0.42371758818626404
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/openapi/utils.py",
+          "symbol": "nan",
+          "score": 0.17000463604927063
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/openapi/utils.py",
+          "symbol": "get_openapi_path",
+          "score": 0.06884849816560745
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/behind_a_proxy/tutorial002_py310.py",
+          "symbol": "nan",
+          "score": 0.002348230918869376
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/dependencies/tutorial005_py310.py",
+          "symbol": "nan",
+          "score": 0.0009906678460538387
+        }
+      ]
+    },
+    {
+      "id": "q13",
+      "query": "pydantic model field compat v2 compatibility layer",
+      "recall": true,
+      "rank": 1,
+      "latency_ms": 2994.184359005885,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/_compat/v2.py",
+          "symbol": "nan",
+          "score": 0.974262535572052
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/_compat/v2.py",
+          "symbol": "nan",
+          "score": 0.9416835308074951
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/_compat/__init__.py",
+          "symbol": "nan",
+          "score": 0.907913327217102
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/_compat/shared.py",
+          "symbol": "nan",
+          "score": 0.7909480333328247
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/utils.py",
+          "symbol": "nan",
+          "score": 0.3651481866836548
+        }
+      ]
+    },
+    {
+      "id": "q14",
+      "query": "server sent events SSE streaming response",
+      "recall": true,
+      "rank": 2,
+      "latency_ms": 2744.8201829975005,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/server_sent_events/tutorial003_py310.py",
+          "symbol": "nan",
+          "score": 0.9960546493530273
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/sse.py",
+          "symbol": "nan",
+          "score": 0.9962614178657532
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/server_sent_events/tutorial005_py310.py",
+          "symbol": "nan",
+          "score": 0.995465099811554
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/server_sent_events/tutorial001_py310.py",
+          "symbol": "nan",
+          "score": 0.9937480688095093
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/server_sent_events/tutorial001_py310.py",
+          "symbol": "nan",
+          "score": 0.9891015887260437
+        }
+      ]
+    },
+    {
+      "id": "q15",
+      "query": "static files serve mount directory",
+      "recall": true,
+      "rank": 5,
+      "latency_ms": 2870.024521020241,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/static_files/tutorial001_py310.py",
+          "symbol": "nan",
+          "score": 0.9509909152984619
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/templates/tutorial001_py310.py",
+          "symbol": "nan",
+          "score": 0.6199310421943665
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/custom_docs_ui/tutorial002_py310.py",
+          "symbol": "nan",
+          "score": 0.3128761947154999
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/scripts/docs.py",
+          "symbol": "nan",
+          "score": 0.0008434625342488289
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/staticfiles.py",
+          "symbol": "nan",
+          "score": 0.000316015153657645
+        }
+      ]
+    },
+    {
+      "id": "q16",
+      "query": "Jinja2 template rendering HTML response",
+      "recall": false,
+      "rank": null,
+      "latency_ms": 2862.6236410054844,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/templates/tutorial001_py310.py",
+          "symbol": "nan",
+          "score": 0.9925251007080078
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/responses.py",
+          "symbol": "nan",
+          "score": 0.005283579230308533
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/custom_response/tutorial004_py310.py",
+          "symbol": "nan",
+          "score": 0.003494581673294306
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/custom_response/tutorial009c_py310.py",
+          "symbol": "nan",
+          "score": 0.0011544401058927178
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/responses.py",
+          "symbol": "nan",
+          "score": 0.0011913577327504754
+        }
+      ]
+    },
+    {
+      "id": "q17",
+      "query": "application lifespan context manager startup shutdown",
+      "recall": false,
+      "rank": null,
+      "latency_ms": 2762.261441006558,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/app_testing/tutorial004_py310.py",
+          "symbol": "nan",
+          "score": 0.0010328537318855524
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/events/tutorial002_py310.py",
+          "symbol": "nan",
+          "score": 0.000183103111339733
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/middleware/asyncexitstack.py",
+          "symbol": "nan",
+          "score": 2.068385401798878e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/concurrency.py",
+          "symbol": "contextmanager_in_threadpool",
+          "score": 1.7957334421225823e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/scripts/playwright/sql_databases/image02.py",
+          "symbol": "nan",
+          "score": 1.5297209756681696e-05
+        }
+      ]
+    },
+    {
+      "id": "q18",
+      "query": "Swagger UI ReDoc HTML documentation endpoint",
+      "recall": true,
+      "rank": 1,
+      "latency_ms": 2905.333608010551,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/openapi/docs.py",
+          "symbol": "get_redoc_html",
+          "score": 0.06058965623378754
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/exceptions.py",
+          "symbol": "nan",
+          "score": 0.0005893554189242423
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/generate_clients/tutorial004.js",
+          "symbol": "nan",
+          "score": 1.4829568499408197e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/scripts/deploy_docs_status.py",
+          "symbol": "main",
+          "score": 1.9607017748057842e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/metadata/tutorial003_py310.py",
+          "symbol": "nan",
+          "score": 5.9481204516487196e-05
+        }
+      ]
+    },
+    {
+      "id": "q19",
+      "query": "form data file upload multipart processing",
+      "recall": false,
+      "rank": null,
+      "latency_ms": 2203.942053980427,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/request_files/tutorial003_an_py310.py",
+          "symbol": "nan",
+          "score": 0.9377202391624451
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/request_files/tutorial003_py310.py",
+          "symbol": "nan",
+          "score": 0.9110333919525146
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/param_functions.py",
+          "symbol": "File",
+          "score": 0.8535591959953308
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/request_files/tutorial002_an_py310.py",
+          "symbol": "nan",
+          "score": 0.7777823805809021
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/docs_src/request_files/tutorial002_py310.py",
+          "symbol": "nan",
+          "score": 0.6786282062530518
+        }
+      ]
+    },
+    {
+      "id": "q20",
+      "query": "flatten dependency graph get dependant params",
+      "recall": true,
+      "rank": 1,
+      "latency_ms": 2964.140216994565,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/dependencies/utils.py",
+          "symbol": "nan",
+          "score": 0.9866896867752075
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/dependencies/utils.py",
+          "symbol": "get_flat_dependant",
+          "score": 0.9853509664535522
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/openapi/utils.py",
+          "symbol": "nan",
+          "score": 0.8901455402374268
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/dependencies/models.py",
+          "symbol": "Dependant",
+          "score": 0.3573644161224365
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/param_functions.py",
+          "symbol": "Depends",
+          "score": 0.10131475329399109
+        }
+      ]
+    }
+  ]
+}

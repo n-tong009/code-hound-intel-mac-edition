@@ -1,0 +1,670 @@
+{
+  "phase": "phase1",
+  "timestamp": "20260422T084117Z",
+  "recall_at_5": 0.15,
+  "mrr": 0.15,
+  "recall_hits": 3,
+  "total": 20,
+  "details": [
+    {
+      "id": "q01",
+      "query": "依存性注入の解決処理",
+      "recall": false,
+      "rank": null,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/openapi/constants.py",
+          "symbol": "nan",
+          "score": 0.0003221077786292881
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/http.py",
+          "symbol": "nan",
+          "score": 0.0001757973659550771
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 0.00016765306645538658
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 0.00016477391181979328
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/requests.py",
+          "symbol": "nan",
+          "score": 0.0001635001099202782
+        }
+      ]
+    },
+    {
+      "id": "q02",
+      "query": "リクエストボディのバリデーションとパース",
+      "recall": false,
+      "rank": null,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/requests.py",
+          "symbol": "nan",
+          "score": 0.0001400573382852599
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/oauth2.py",
+          "symbol": "nan",
+          "score": 8.955413795774803e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "nan",
+          "score": 8.098285616142675e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/datastructures.py",
+          "symbol": "nan",
+          "score": 7.973168249009177e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "nan",
+          "score": 7.330802327487618e-05
+        }
+      ]
+    },
+    {
+      "id": "q03",
+      "query": "OpenAPI スキーマ生成",
+      "recall": false,
+      "rank": null,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 0.0007778646540828049
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/api_key.py",
+          "symbol": "nan",
+          "score": 0.00014358821499627084
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/http.py",
+          "symbol": "nan",
+          "score": 0.00010219075193163007
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/oauth2.py",
+          "symbol": "nan",
+          "score": 7.943207310745493e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 7.521728548454121e-05
+        }
+      ]
+    },
+    {
+      "id": "q04",
+      "query": "WebSocket ルートの登録とハンドリング",
+      "recall": true,
+      "rank": 1,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/websockets.py",
+          "symbol": "nan",
+          "score": 0.7801194190979004
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/http.py",
+          "symbol": "nan",
+          "score": 6.504050543298945e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/middleware/httpsredirect.py",
+          "symbol": "nan",
+          "score": 5.119619163451716e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/sse.py",
+          "symbol": "nan",
+          "score": 4.474106754059903e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/requests.py",
+          "symbol": "nan",
+          "score": 4.350786912254989e-05
+        }
+      ]
+    },
+    {
+      "id": "q05",
+      "query": "HTTP 例外ハンドラ",
+      "recall": false,
+      "rank": null,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/http.py",
+          "symbol": "nan",
+          "score": 4.438689211383462e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/http.py",
+          "symbol": "nan",
+          "score": 3.267252759542316e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/http.py",
+          "symbol": "nan",
+          "score": 3.22152154694777e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/oauth2.py",
+          "symbol": "nan",
+          "score": 2.188866346841678e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "nan",
+          "score": 1.9989893189631402e-05
+        }
+      ]
+    },
+    {
+      "id": "q06",
+      "query": "OAuth2 パスワード認証フロー",
+      "recall": false,
+      "rank": null,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/openapi/docs.py",
+          "symbol": "nan",
+          "score": 0.00034694417263381183
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "nan",
+          "score": 2.6215680918539874e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 2.354790376557503e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 2.32060829148395e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 2.3161246645031497e-05
+        }
+      ]
+    },
+    {
+      "id": "q07",
+      "query": "Bearer トークン認証",
+      "recall": false,
+      "rank": null,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 1.9407185391173698e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 1.849222280725371e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/openapi/docs.py",
+          "symbol": "nan",
+          "score": 1.8334550986764953e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 1.8196973542217165e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "nan",
+          "score": 1.80702318175463e-05
+        }
+      ]
+    },
+    {
+      "id": "q08",
+      "query": "API キーヘッダー認証",
+      "recall": false,
+      "rank": null,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 0.0001503288367530331
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "nan",
+          "score": 5.6647477322258055e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 5.549221168621443e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/openapi/docs.py",
+          "symbol": "nan",
+          "score": 2.8193422622280195e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 2.6584126317175105e-05
+        }
+      ]
+    },
+    {
+      "id": "q09",
+      "query": "ルートハンドラのレスポンスシリアライズ",
+      "recall": true,
+      "rank": 1,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "nan",
+          "score": 8.51775475894101e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/oauth2.py",
+          "symbol": "nan",
+          "score": 7.254001684486866e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 6.773955828975886e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 6.520421447930858e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "nan",
+          "score": 6.411891808966175e-05
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "query": "バックグラウンドタスクの実行",
+      "recall": false,
+      "rank": null,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 5.070793122285977e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "nan",
+          "score": 4.010531847598031e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 3.6615438148146495e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 3.524636849761009e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 3.301344986539334e-05
+        }
+      ]
+    },
+    {
+      "id": "q11",
+      "query": "CORS ミドルウェア設定",
+      "recall": false,
+      "rank": null,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 0.0001676545070949942
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 1.7756659872247837e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/openapi/docs.py",
+          "symbol": "nan",
+          "score": 1.753532160364557e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/exceptions.py",
+          "symbol": "nan",
+          "score": 1.748744398355484e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 1.713500387268141e-05
+        }
+      ]
+    },
+    {
+      "id": "q12",
+      "query": "パスパラメータとクエリパラメータの抽出",
+      "recall": false,
+      "rank": null,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "nan",
+          "score": 8.712481940165162e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "nan",
+          "score": 8.215040725190192e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "nan",
+          "score": 7.677183020859957e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 7.284905586857349e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 7.162772089941427e-05
+        }
+      ]
+    },
+    {
+      "id": "q13",
+      "query": "Pydantic モデルの互換レイヤー",
+      "recall": false,
+      "rank": null,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 0.00021324063709471375
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 2.1396779629867524e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/openapi/docs.py",
+          "symbol": "nan",
+          "score": 2.0567602405208163e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 2.043413041974418e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "nan",
+          "score": 1.943213283084333e-05
+        }
+      ]
+    },
+    {
+      "id": "q14",
+      "query": "SSE (Server-Sent Events) レスポンス",
+      "recall": false,
+      "rank": null,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/exceptions.py",
+          "symbol": "nan",
+          "score": 5.7057233789237216e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "nan",
+          "score": 3.246740743634291e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 3.246740743634291e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 2.4055167159531265e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/openapi/models.py",
+          "symbol": "nan",
+          "score": 2.3544578652945347e-05
+        }
+      ]
+    },
+    {
+      "id": "q15",
+      "query": "静的ファイル配信の設定",
+      "recall": false,
+      "rank": null,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/openapi/docs.py",
+          "symbol": "nan",
+          "score": 2.9512531909858808e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 2.733577275648713e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "nan",
+          "score": 2.733577275648713e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 2.64832178800134e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/openapi/docs.py",
+          "symbol": "nan",
+          "score": 2.575719918240793e-05
+        }
+      ]
+    },
+    {
+      "id": "q16",
+      "query": "テンプレートエンジンの統合",
+      "recall": false,
+      "rank": null,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 2.9490647648344748e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 2.851054523489438e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "nan",
+          "score": 2.6842879378818907e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/oauth2.py",
+          "symbol": "nan",
+          "score": 2.178454087697901e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/http.py",
+          "symbol": "nan",
+          "score": 2.144513200619258e-05
+        }
+      ]
+    },
+    {
+      "id": "q17",
+      "query": "アプリケーションのライフスパン管理",
+      "recall": true,
+      "rank": 1,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 0.00011585491301957518
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "nan",
+          "score": 0.00010269159247400239
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/openapi/docs.py",
+          "symbol": "nan",
+          "score": 9.926625352818519e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "nan",
+          "score": 9.021325968205929e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 8.841270027915016e-05
+        }
+      ]
+    },
+    {
+      "id": "q18",
+      "query": "OpenAPI ドキュメント UI の生成",
+      "recall": false,
+      "rank": null,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/oauth2.py",
+          "symbol": "nan",
+          "score": 0.0004901807405985892
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/http.py",
+          "symbol": "nan",
+          "score": 0.0001738795399433002
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/oauth2.py",
+          "symbol": "nan",
+          "score": 0.00016837847942952067
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/http.py",
+          "symbol": "nan",
+          "score": 0.0001497449993621558
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 0.0001275757240364328
+        }
+      ]
+    },
+    {
+      "id": "q19",
+      "query": "フォームデータとファイルアップロードの処理",
+      "recall": false,
+      "rank": null,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/routing.py",
+          "symbol": "nan",
+          "score": 6.207085971254855e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 5.96433637838345e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/http.py",
+          "symbol": "nan",
+          "score": 5.188690920476802e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 4.8428883019369096e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 3.628251943155192e-05
+        }
+      ]
+    },
+    {
+      "id": "q20",
+      "query": "依存関係グラフのフラット化",
+      "recall": false,
+      "rank": null,
+      "top_hits": [
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 5.796289042336866e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 5.011178654967807e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/openapi/docs.py",
+          "symbol": "nan",
+          "score": 4.3006377381971106e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/applications.py",
+          "symbol": "nan",
+          "score": 3.944657510146499e-05
+        },
+        {
+          "path": "/path/to/code-rag-targets/fastapi/fastapi/security/oauth2.py",
+          "symbol": "nan",
+          "score": 3.632098014350049e-05
+        }
+      ]
+    }
+  ]
+}

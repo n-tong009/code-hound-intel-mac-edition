@@ -1,0 +1,50 @@
+repos:
+  # 通常運用 repo (汎用マルチ repo)。評価台 fastapi は repos[] から外し eval/config.eval.yaml へ降格 (FR-008/SC-006)。
+  # 取り込み運用: 作業機から rsync で data/snapshots/<name>/ へ差分転送し index_repo (specs/003 US2)。
+  - name: market_brief
+    path: data/snapshots/market_brief
+    # languages は初回 sync 後に Market_Brief の構成を確認して確定 (research R5)。
+    languages: [python, typescript, javascript]
+
+  - name: static-site-generator
+    path: data/snapshots/static-site-generator
+    languages: [python, typescript, javascript]
+
+embedding:
+  provider: fastembed
+  model: BAAI/bge-small-en-v1.5
+  dimension: 384
+  batch_size: 32
+
+storage:
+  type: sqlite
+  path: ./data/code_rag.db
+
+server:
+  # 127.0.0.1 固定 (Constitution III)。リモートは SSH トンネル経由。
+  host: 127.0.0.1
+  port: 8765
+  transport: sse
+
+chunking:
+  chunk_lines: 40
+  chunk_lines_overlap: 5
+  max_chars: 2000
+
+retrieval:
+  top_k_vector: 20
+  top_k_bm25: 20
+  top_k_final: 5
+  rrf_k: 60
+  use_reranker: true
+  max_per_file: 2
+
+hygiene:
+  respect_gitignore: true
+  # 一般用途。fastapi 固有の 256KB 上限と docs 除外は eval/config.eval.yaml 側に温存。
+  max_file_bytes: 262144
+  max_file_lines: 5000
+  secret_scan: true
+  # 通常運用 repo は固有除外なし (一般化)。
+  extra_exclude_dirs: []
+  extra_exclude_globs: []

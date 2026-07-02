@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+ "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>com.local.code-rag-watcher</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/local/bin/uv</string>
+    <string>run</string>
+    <string>--directory</string>
+    <string>/path/to/code-rag</string>
+    <string>python</string>
+    <string>watcher.py</string>
+  </array>
+  <key>RunAtLoad</key><true/>
+  <key>KeepAlive</key><true/>
+  <key>StandardOutPath</key><string>/path/to/code-rag/data/logs/watcher.stdout.log</string>
+  <key>StandardErrorPath</key><string>/path/to/code-rag/data/logs/watcher.stderr.log</string>
+</dict>
+</plist>
