@@ -1,0 +1,28 @@
+# open-pull-requests-limit: 0 は version updates (定期的な最新化 PR) を抑止する指定。
+# security updates には影響しない (固定上限 10 の別枠) ので、脆弱性 PR は出る。
+#
+# security updates の前提: リポ設定の Dependency graph / Dependabot alerts /
+# Dependabot security updates が有効であること。このファイルはその代替にならない。
+#
+# uv エコシステム: uv.lock 更新対応は 2026-01-14 から、
+# security updates 対応は 2026年9月から。
+#
+# security update は「最新版」ではなく「脆弱性が直る最小バージョン」まで上げる。
+# パッチ版とは限らず、major 版もありうる。
+#
+# cooldown (default-days / semver-major-days / semver-minor-days / semver-patch-days、
+# 既定3日、範囲1〜90日) はサプライチェーン対策になるが、version updates を 0 に
+# 抑止しているため効果対象がなく、security updates への適用も GitHub ドキュメントで
+# 記述が揺れ未確定のため設定しない。
+version: 2
+updates:
+  - package-ecosystem: "uv"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 0
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 0

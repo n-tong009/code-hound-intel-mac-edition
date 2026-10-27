@@ -1,0 +1,51 @@
+# test と audit を別ジョブにする理由:
+# 単一ジョブだと pip-audit が落ちた時点で pytest がスキップされ、
+# 「CVE が出た」のか「コードが壊れた」のか区別できないまま赤くなる。
+# 赤が常態化すると信号として機能しなくなる。
+#   test 赤  = コード/依存解決の問題。マージ不可。
+#   audit 赤 = コードは無罪。依存の脆弱性として別対応。
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "0 0 * * 1"  # 新規CVE検知用 (毎週月曜)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  # PR の古い実行だけ打ち切る。main push と schedule は打ち切らない
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      # setup-uv は major 可変タグ廃止のためフルバージョン固定。
+      # checkout v5+ と同じく node24 ランタイム
+      - uses: astral-sh/setup-uv@v10.3.2
+      - run: uv sync --frozen --all-extras
+      - run: uv run --frozen pytest
+
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      # setup-uv は major 可変タグ廃止のためフルバージョン固定。
+      # checkout v5+ と同じく node24 ランタイム
+      - uses: astral-sh/setup-uv@v10.3.2
+      - run: uv export --frozen --format requirements-txt --no-emit-project -o requirements-audit.txt
+      # --strict は外さない。修正版未リリースの CVE に限り
+      # --ignore-vuln <ID> で期限付き除外可。その場合は理由・影響評価・
+      # 再確認期限をここに併記する。
+      - run: uvx pip-audit@2.10.1 --disable-pip --strict -r requirements-audit.txt
