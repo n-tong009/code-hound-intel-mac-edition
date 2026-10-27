@@ -5,7 +5,7 @@ description = "CodeHound Intel Edition — code semantic search MCP server for I
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
 dependencies = [
-    "fastmcp>=3.2.4",
+    "fastmcp>=3.4.10,<4",  # GHSA-7xgj-8392-5q4r
     "fastembed>=0.4.0",
     "flashrank>=0.2.10",
     "llama-index-core>=0.14",
@@ -23,6 +23,34 @@ dependencies = [
 
 [tool.uv]
 package = false
+# 推移的依存の脆弱性対応。
+# 各行は「脆弱性が直る最小バージョン」の下限のみ。上限・最新固定はしない。
+# `uv lock --upgrade` での一括更新は禁止 (major 版の飛び越えを引き込むため)。
+# コメントの ID は下限を決めた脆弱性 (代表)。
+constraint-dependencies = [
+    "aiohttp>=3.14.4",            # CVE-2026-111063, CVE-2026-111064, CVE-2026-111065 ほか (計22件)
+    "anyio>=4.14.2",              # PYSEC-2026-4024, PYSEC-2026-4025
+    "authlib>=1.7.1",             # PYSEC-2026-2119 (osv のみで検出)
+    "banks>=2.5.1",               # PYSEC-2026-4201 ほか (計4件)
+    "certifi>=2026.10.19",        # PYSEC-2026-4320
+    "cryptography>=50.0.0",       # PYSEC-2026-3552 ほか (計4件)
+    "filelock>=4.2.1",            # CVE-2026-112907, CVE-2026-112913, CVE-2026-112940
+    "fsspec>=2026.6.0",           # PYSEC-2026-4217
+    "idna>=3.15",                 # PYSEC-2026-215
+    "joserfc>=1.6.8",             # PYSEC-2026-2528 ほか (計2件)
+    "mcp>=1.30.0",                # CVE-2026-59951 ほか (計4件)
+    "multidict>=6.9.1",           # PYSEC-2026-4244
+    "nltk>=3.10.4",               # PYSEC-2026-3740 (DB 上は修正版未記載だが 3.10.4 で非検出) ほか (計31件)
+    "opentelemetry-api>=1.45.1",  # CVE-2026-114603
+    "pillow>=13.0.0",             # CVE-2026-112390 ほか (計51件)
+    "pydantic-settings>=2.14.2",  # CVE-2026-58203
+    "pyjwt>=2.15.0",              # PYSEC-2026-4141, PYSEC-2026-4183 ほか (計16件)
+    "python-multipart>=0.0.31",   # PYSEC-2026-3040 ほか (計4件)
+    "setuptools>=84.1.0",         # GHSA-xmj3-9gf7-h52w ほか (計2件)
+    "starlette>=1.3.1",           # PYSEC-2026-249 ほか (計5件)
+    "tinytag>=2.3.0",             # CVE-2026-104266
+    "urllib3>=2.8.0",             # PYSEC-2026-4175, PYSEC-2026-4176, PYSEC-2026-4177 ほか (計5件)
+]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
